@@ -1,12 +1,12 @@
 import { DeleteResponse, PaginatedResponse } from "@medusajs/types";
-import { BrandDTO } from "@/types/brand";
+import { AdminBrand } from "./entities";
 
 export interface AdminBrandResponse {
-  brand: BrandDTO;
+  brand: AdminBrand;
 }
 
 export type AdminBrandListReponse = PaginatedResponse<{
-  brands: BrandDTO[];
+  brands: AdminBrand[];
 }>;
 
 export interface AdminBrandDeleteReponse extends DeleteResponse<"brand"> {}
