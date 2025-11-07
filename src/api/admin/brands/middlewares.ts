@@ -22,10 +22,20 @@ export const brandsMiddlewares: MiddlewareRoute[] = [
     ],
   },
   {
-    methods: ["POST"],
+    method: ["POST"],
     matcher: "/admin/brands",
     middlewares: [
       validateAndTransformBody(AdminCreateBrand),
+      validateAndTransformQuery(
+        AdminGetBrandParams,
+        QueryConfig.retrieveBrandConfig,
+      ),
+    ],
+  },
+  {
+    method: ["GET"],
+    matcher: "/admin/brands/:id",
+    middlewares: [
       validateAndTransformQuery(
         AdminGetBrandParams,
         QueryConfig.retrieveBrandConfig,

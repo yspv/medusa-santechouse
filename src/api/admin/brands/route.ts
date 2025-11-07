@@ -1,10 +1,9 @@
-import { AdminBrandParams, AdminCreateBrand } from "@/types";
 import * as HttpTypes from "@/types/http";
 import { createBrandsWorkflow } from "@/workflows/brand/workflows";
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework";
 
 export const GET = async (
-  req: MedusaRequest<AdminBrandParams>,
+  req: MedusaRequest<HttpTypes.AdminBrandParams>,
   res: MedusaResponse,
 ) => {
   const query = req.scope.resolve("query");
