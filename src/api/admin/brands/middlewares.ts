@@ -13,7 +13,7 @@ import * as QueryConfig from "./query-config";
 export const brandsMiddlewares: MiddlewareRoute[] = [
   {
     method: ["GET"],
-    matcher: "/admins/brands",
+    matcher: "/admin/brands",
     middlewares: [
       validateAndTransformQuery(
         AdminGetBrandsParams,
