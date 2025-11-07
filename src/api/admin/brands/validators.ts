@@ -15,3 +15,12 @@ export const AdminCreateBrand = z
   })
   .strict();
 export type AdminCreateBrand = z.infer<typeof AdminCreateBrand>;
+
+export const AdminUpdateBrand = z
+  .object({
+    name: z.string().min(1).optional(),
+    is_active: z.boolean().optional(),
+    metadata: z.record(z.unknown()).nullish(),
+  })
+  .strict();
+export type AdminUpdateBrand = z.infer<typeof AdminUpdateBrand>;

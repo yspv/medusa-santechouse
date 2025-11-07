@@ -7,6 +7,7 @@ import {
   AdminCreateBrand,
   AdminGetBrandParams,
   AdminGetBrandsParams,
+  AdminUpdateBrand,
 } from "./validators";
 import * as QueryConfig from "./query-config";
 
@@ -36,6 +37,17 @@ export const brandsMiddlewares: MiddlewareRoute[] = [
     method: ["GET"],
     matcher: "/admin/brands/:id",
     middlewares: [
+      validateAndTransformQuery(
+        AdminGetBrandParams,
+        QueryConfig.retrieveBrandConfig,
+      ),
+    ],
+  },
+  {
+    method: ["POST"],
+    matcher: "/admin/brands/:id",
+    middlewares: [
+      validateAndTransformBody(AdminUpdateBrand),
       validateAndTransformQuery(
         AdminGetBrandParams,
         QueryConfig.retrieveBrandConfig,
