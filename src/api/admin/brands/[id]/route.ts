@@ -1,6 +1,9 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework";
 import * as HttpTypes from "@/types/http";
-import { updateBrandsWorkflow } from "@/workflows/brand/workflows";
+import {
+  deleteBrandsWorkflow,
+  updateBrandsWorkflow,
+} from "@/workflows/brand/workflows";
 
 export const GET = async (
   req: MedusaRequest<HttpTypes.AdminBrandParams>,
@@ -35,4 +38,17 @@ export const POST = async (
     filters: { id },
   });
   res.json({ brand });
+};
+
+export const DELETE = async (
+  req: MedusaRequest,
+  res: MedusaResponse<HttpTypes.AdminBrandDeleteReponse>,
+) => {
+  const { id } = req.params;
+  await deleteBrandsWorkflow(req.scope).run({ input: [id] });
+  res.json({
+    id,
+    object: "brand",
+    deleted: true,
+  });
 };

@@ -54,4 +54,9 @@ export const brandsMiddlewares: MiddlewareRoute[] = [
       ),
     ],
   },
+  {
+    method: ["DELETE"],
+    matcher: "/admin/brands/:id",
+    middlewares: [],
+  },
 ];
