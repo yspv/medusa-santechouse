@@ -26,3 +26,7 @@ export interface UpdateBrandDTO {
   name?: string;
   is_active?: boolean;
 }
+
+export interface UpsertBrandDTO extends UpdateBrandDTO {
+  id?: string;
+}

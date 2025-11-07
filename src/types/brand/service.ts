@@ -10,6 +10,7 @@ import {
   CreateBrandDTO,
   FilterableBrandProps,
   UpdateBrandDTO,
+  UpsertBrandDTO,
 } from "./common";
 
 export interface IBrandModuleService extends IModuleService {
@@ -38,6 +39,16 @@ export interface IBrandModuleService extends IModuleService {
 
   createBrands(
     data: CreateBrandDTO,
+    sharedContext?: Context,
+  ): Promise<BrandDTO>;
+
+  upsertBrands(
+    data: UpsertBrandDTO[],
+    sharedContext?: Context,
+  ): Promise<BrandDTO[]>;
+
+  upsertBrands(
+    data: UpsertBrandDTO,
     sharedContext?: Context,
   ): Promise<BrandDTO>;
 
