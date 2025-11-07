@@ -1,4 +1,6 @@
-import { AdminBrandParams } from "@/types";
+import { AdminBrandParams, AdminCreateBrand } from "@/types";
+import * as HttpTypes from "@/types/http";
+import { createBrandsWorkflow } from "@/workflows/brand/workflows";
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework";
 
 export const GET = async (
@@ -15,8 +17,18 @@ export const GET = async (
 
   res.json({
     brands,
-    count: count!,
-    limit: take!,
-    offset: skip!,
+    count,
+    limit: take,
+    offset: skip,
   });
+};
+
+export const POST = async (
+  req: MedusaRequest<HttpTypes.AdminCreateBrand>,
+  res: MedusaResponse,
+) => {
+  const { result } = await createBrandsWorkflow(req.scope).run({
+    input: [req.validatedBody],
+  });
+  res.json({ brand: result });
 };

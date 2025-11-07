@@ -1,8 +1,13 @@
 import {
   MiddlewareRoute,
+  validateAndTransformBody,
   validateAndTransformQuery,
 } from "@medusajs/framework";
-import { AdminGetBrandsParams } from "./validators";
+import {
+  AdminCreateBrand,
+  AdminGetBrandParams,
+  AdminGetBrandsParams,
+} from "./validators";
 import * as QueryConfig from "./query-config";
 
 export const brandsMiddlewares: MiddlewareRoute[] = [
@@ -13,6 +18,17 @@ export const brandsMiddlewares: MiddlewareRoute[] = [
       validateAndTransformQuery(
         AdminGetBrandsParams,
         QueryConfig.listBrandConfig,
+      ),
+    ],
+  },
+  {
+    methods: ["POST"],
+    matcher: "/admin/brands",
+    middlewares: [
+      validateAndTransformBody(AdminCreateBrand),
+      validateAndTransformQuery(
+        AdminGetBrandParams,
+        QueryConfig.retrieveBrandConfig,
       ),
     ],
   },

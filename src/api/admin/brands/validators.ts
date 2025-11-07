@@ -1,3 +1,17 @@
-import { createFindParams } from "@medusajs/medusa/api/utils/validators";
+import {
+  createFindParams,
+  createSelectParams,
+} from "@medusajs/medusa/api/utils/validators";
+import z from "zod";
 
 export const AdminGetBrandsParams = createFindParams({ offset: 0, limit: 50 });
+export const AdminGetBrandParams = createSelectParams();
+
+export const AdminCreateBrand = z
+  .object({
+    name: z.string().min(1),
+    is_active: z.boolean().optional(),
+    metadata: z.record(z.unknown()).nullish(),
+  })
+  .strict();
+export type AdminCreateBrand = z.infer<typeof AdminCreateBrand>;
