@@ -1,4 +1,4 @@
-import * as HttpTypes from "@root/types/http";
+import * as HttpTypes from "../../../types/http";
 import { queryKeysFactory } from "../../lib/query-key-factory";
 import {
   QueryKey,
@@ -8,8 +8,8 @@ import {
   UseQueryOptions,
 } from "@tanstack/react-query";
 import { FetchError } from "@medusajs/js-sdk";
-import { sdk } from "@/lib/sdk";
-import { queryClient } from "@/lib/query-client";
+import { sdk } from "../../lib/sdk";
+import { queryClient } from "../../lib/query-client";
 
 const BRANDS_QUERY_KEY = "brands" as const;
 export const brandsQueryKeys = queryKeysFactory(BRANDS_QUERY_KEY);
