@@ -6,10 +6,10 @@ import {
   UseMutationOptions,
   useQuery,
   UseQueryOptions,
+  useQueryClient,
 } from "@tanstack/react-query";
 import { FetchError } from "@medusajs/js-sdk";
 import { sdk } from "../../lib/sdk";
-import { queryClient } from "../../lib/query-client";
 
 const BRANDS_QUERY_KEY = "brands" as const;
 export const brandsQueryKeys = queryKeysFactory(BRANDS_QUERY_KEY);
@@ -68,6 +68,7 @@ export const useCreateBrand = (
     HttpTypes.AdminCreateBrand
   >,
 ) => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (payload) =>
       sdk.client.fetch("/admin/brands", {
@@ -91,6 +92,7 @@ export const useUpdateBrand = (
     HttpTypes.AdminUpdateBrand
   >,
 ) => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (payload) =>
       sdk.client.fetch(`/admin/brands/${id}`, {
@@ -115,6 +117,7 @@ export const useDeleteBrand = (
     void
   >,
 ) => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: () =>
       sdk.client.fetch<HttpTypes.AdminBrandDeleteReponse>(
