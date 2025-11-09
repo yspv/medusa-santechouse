@@ -2,6 +2,8 @@ import { Container, Heading, StatusBadge } from "@medusajs/ui";
 import { AdminBrand } from "../../../../../../types/http";
 import { getIsActiveProps } from "../../../common/utils";
 import { useTranslation } from "react-i18next";
+import { ActionMenu } from "../../../../../components/common/action-menu";
+import { PencilSquare } from "@medusajs/icons";
 
 type BrandGeneralSectionProps = {
   brand: AdminBrand;
@@ -21,6 +23,19 @@ export const BrandGeneralSection = (props: BrandGeneralSectionProps) => {
               {activeProps.label}
             </StatusBadge>
           </div>
+          <ActionMenu
+            groups={[
+              {
+                actions: [
+                  {
+                    label: t("actions.edit"),
+                    icon: <PencilSquare />,
+                    to: "edit",
+                  },
+                ],
+              },
+            ]}
+          />
         </div>
       </div>
     </Container>
