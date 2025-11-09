@@ -23,10 +23,11 @@ export interface CreateBrandDTO {
 }
 
 export interface UpdateBrandDTO {
+  id: string;
   name?: string;
   is_active?: boolean;
 }
 
-export interface UpsertBrandDTO extends UpdateBrandDTO {
+export interface UpsertBrandDTO extends Partial<CreateBrandDTO> {
   id?: string;
 }

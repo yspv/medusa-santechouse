@@ -28,7 +28,7 @@ export const POST = async (
   const { id } = req.params;
   const query = req.scope.resolve("query");
   await updateBrandsWorkflow(req.scope).run({
-    input: { selector: { id }, update: req.validatedBody },
+    input: { id, ...req.body },
   });
   const {
     data: [brand],
