@@ -26,8 +26,16 @@ export const POST = async (
   req: MedusaRequest<HttpTypes.AdminCreateBrand>,
   res: MedusaResponse,
 ) => {
+  const query = req.scope.resolve("query");
   const { result } = await createBrandsWorkflow(req.scope).run({
     input: [req.validatedBody],
   });
-  res.json({ brand: result });
+  const {
+    data: [brand],
+  } = await query.graph({
+    entity: "brands",
+    fields: req.queryConfig.fields,
+    filters: { id: result.map((b) => b.id) },
+  });
+  res.json({ brand });
 };
