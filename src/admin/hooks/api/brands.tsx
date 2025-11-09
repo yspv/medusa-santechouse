@@ -16,7 +16,7 @@ export const brandsQueryKeys = queryKeysFactory(BRANDS_QUERY_KEY);
 
 export const useBrand = (
   id: string,
-  query: HttpTypes.AdminBrandParams,
+  query?: HttpTypes.AdminBrandParams,
   options?: Omit<
     UseQueryOptions<
       HttpTypes.AdminBrandResponse,
@@ -30,7 +30,7 @@ export const useBrand = (
   const { data, ...rest } = useQuery({
     queryKey: brandsQueryKeys.detail(id, query),
     queryFn: () =>
-      sdk.client.fetch<HttpTypes.AdminBrandResponse>("/admin/brands", {
+      sdk.client.fetch<HttpTypes.AdminBrandResponse>(`/admin/brands/${id}`, {
         query,
       }),
     ...options,
