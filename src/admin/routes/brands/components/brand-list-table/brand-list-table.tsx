@@ -9,6 +9,7 @@ import {
 import { useBrandTableQuery } from "./use-brand-table-query";
 import { useBrands } from "../../../../hooks/api/brands";
 import { keepPreviousData } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 const PAGE_SIZE = 20;
 
@@ -17,6 +18,7 @@ export const BrandListTable = () => {
     pageSize: PAGE_SIZE,
     pageIndex: 0,
   });
+  const navigate = useNavigate();
   const { searchParams } = useBrandTableQuery({ pageSize: PAGE_SIZE });
 
   const query = searchParams;
@@ -33,6 +35,7 @@ export const BrandListTable = () => {
     data: brands || [],
     getRowId: (row) => row.id,
     rowCount: count || 0,
+    onRowClick: (_, row) => navigate(`/brands/${row.id}`),
     isLoading,
     pagination: {
       state: pagination,
