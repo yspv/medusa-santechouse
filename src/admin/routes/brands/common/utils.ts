@@ -7,12 +7,12 @@ export function getIsActiveProps(
   switch (isActive) {
     case true:
       return {
-        label: t("categories.fields.status.active"),
+        label: t("brands.fields.status.active"),
         color: "green",
       };
     case false:
       return {
-        label: t("categories.fields.status.inactive"),
+        label: t("brands.fields.status.inactive"),
         color: "red",
       };
   }
