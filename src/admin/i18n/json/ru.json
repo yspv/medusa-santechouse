@@ -1,0 +1,25 @@
+{
+  "brands": {
+    "domain": "Бренды",
+    "edit": {
+      "header": "Редактировать бренд",
+      "description": "Редактировать детали бренда",
+      "successToast": "Бренд {{name}} успешно обновлен."
+    },
+    "create": {
+      "header": "Создать бренд",
+      "description": "Создать новый бренд",
+      "successToast": "Бренд {{name}} успешно создан."
+    },
+    "delete": {
+      "confirmation": "Вы собираетесь удалить бренд {{name}}. Это действие нельзя отменить.",
+      "successToast": "Бренд {{name}} успешно удален."
+    },
+    "columns": {
+      "name": "Название",
+      "is_active": "Статус",
+      "created_at": "Создан",
+      "updated_at": "Обновлен"
+    }
+  }
+}
