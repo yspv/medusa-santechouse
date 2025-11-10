@@ -25,7 +25,7 @@ export const BrandCreateForm = () => {
   const handleSubmit = form.handleSubmit(async (data) => {
     await mutateAsync(data, {
       onSuccess: ({ brand }) => {
-        toast.success("Brand successful created");
+        toast.success(t("brands.edit.successToast", { name: brand.name }));
         handleSuccess(`/brands/${brand.id}`);
       },
       onError: (error) => {
@@ -45,9 +45,9 @@ export const BrandCreateForm = () => {
           <div className="flex flex-col items-center p-16">
             <div className="flex w-full max-w-[720px] flex-col gap-y-8">
               <div>
-                <Heading>Create Brand</Heading>
+                <Heading>{t("brands.create.header")}</Heading>
                 <Text size="small" className="text-ui-fg-subtle">
-                  Create a new brand to organize your products.
+                  {t("brands.create.description")}
                 </Text>
               </div>
               <div className="grid grid-cols-1 gap-4">
@@ -56,7 +56,7 @@ export const BrandCreateForm = () => {
                   name="name"
                   render={({ field }) => (
                     <Form.Item>
-                      <Form.Label>Name</Form.Label>
+                      <Form.Label>{t("fields.name")}</Form.Label>
                       <Form.Control>
                         <Input
                           autoComplete="off"
@@ -71,8 +71,8 @@ export const BrandCreateForm = () => {
                 <SwitchBox
                   control={form.control}
                   name="is_active"
-                  label="Active"
-                  description="When disabled, brand not appears"
+                  label={t("brands.fields.status.label")}
+                  description={t("brands.fields.status.hint")}
                 />
               </div>
             </div>
