@@ -27,7 +27,7 @@ const ProductBrandWidget = (props: DetailWidgetProps<AdminProductBrand>) => {
                 {
                   icon: <PencilSquare />,
                   label: t("actions.edit"),
-                  to: "",
+                  to: "brand",
                 },
               ],
             },
