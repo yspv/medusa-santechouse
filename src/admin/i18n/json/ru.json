@@ -1,4 +1,11 @@
 {
+  "products": {
+    "fields": {
+      "brand": {
+        "label": "Бренд"
+      }
+    }
+  },
   "brands": {
     "domain": "Бренды",
     "edit": {
