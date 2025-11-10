@@ -28,8 +28,8 @@ export const BrandEditForm = (props: BrandEditFormProps) => {
   const { mutateAsync, isPending } = useUpdateBrand(brand.id);
   const handleSubmit = form.handleSubmit(async (data) => {
     await mutateAsync(data, {
-      onSuccess: () => {
-        toast.success("Brand successfully edited");
+      onSuccess: ({ brand }) => {
+        toast.success(t("brands.edit.successToast", { name: brand.name }));
         handleSuccess();
       },
       onError: (error) => {
@@ -48,7 +48,7 @@ export const BrandEditForm = (props: BrandEditFormProps) => {
               name="name"
               render={({ field }) => (
                 <Form.Item>
-                  <Form.Label></Form.Label>
+                  <Form.Label>{t("fields.title")}</Form.Label>
                   <Form.Control>
                     <Input autoComplete="off" {...field} />
                   </Form.Control>
@@ -58,8 +58,8 @@ export const BrandEditForm = (props: BrandEditFormProps) => {
             <SwitchBox
               control={form.control}
               name="is_active"
-              label="Active"
-              description="When disabled, brand does not appear"
+              label={t("brands.fields.status.label")}
+              description={t("brands.fields.status.hint")}
             />
           </div>
         </RouteDrawer.Body>
