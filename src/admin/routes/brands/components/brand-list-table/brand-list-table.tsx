@@ -1,6 +1,7 @@
 import React from "react";
 import { useBrandTableColumns } from "./use-brand-table-columns";
 import {
+  createDataTableColumnHelper,
   DataTable,
   DataTablePaginationState,
   Heading,
@@ -11,6 +12,9 @@ import { useBrands } from "../../../../hooks/api/brands";
 import { keepPreviousData } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { AdminBrand } from "../../../../../types/http";
+import { ActionMenu } from "../../../../components/common/action-menu";
+import { PencilSquare } from "@medusajs/icons";
 
 const PAGE_SIZE = 20;
 
@@ -56,7 +60,36 @@ export const BrandListTable = () => {
   );
 };
 
+const BrandActions = ({ brand }: { brand: AdminBrand }) => {
+  const { t } = useTranslation();
+  return (
+    <ActionMenu
+      groups={[
+        {
+          actions: [
+            {
+              icon: <PencilSquare />,
+              label: t("actions.edit"),
+              to: `/brands/${brand.id}/edit`,
+            },
+          ],
+        },
+      ]}
+    />
+  );
+};
+
+const columnHelper = createDataTableColumnHelper<AdminBrand>();
 const useColumns = () => {
   const base = useBrandTableColumns();
-  return React.useMemo(() => base, [base]);
+  return React.useMemo(
+    () => [
+      ...base,
+      columnHelper.display({
+        id: "actions",
+        cell: ({ row }) => <BrandActions brand={row.original} />,
+      }),
+    ],
+    [base],
+  );
 };
