@@ -111,7 +111,7 @@ export const useUpdateBrand = (
 
 export const useDeleteBrand = (
   id: string,
-  options: UseMutationOptions<
+  options?: UseMutationOptions<
     HttpTypes.AdminBrandDeleteReponse,
     FetchError,
     void
