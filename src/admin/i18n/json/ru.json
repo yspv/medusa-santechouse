@@ -20,6 +20,13 @@
       "is_active": "Статус",
       "created_at": "Создан",
       "updated_at": "Обновлен"
+    },
+    "fields": {
+      "status": {
+        "label": "Статус",
+        "active": "Активный",
+        "inactive": "Неактивный"
+      }
     }
   }
 }
