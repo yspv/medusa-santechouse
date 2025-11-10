@@ -11,6 +11,7 @@ export const GET = async (
   const { data: brands, metadata: { count, take, skip } = {} } =
     await query.graph({
       entity: "brand",
+      filters: req.filterableFields,
       ...req.queryConfig,
     });
 

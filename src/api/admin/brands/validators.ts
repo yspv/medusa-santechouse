@@ -4,7 +4,16 @@ import {
 } from "@medusajs/medusa/api/utils/validators";
 import z from "zod";
 
-export const AdminGetBrandsParams = createFindParams({ offset: 0, limit: 50 });
+export const AdminBrandsParamsFields = z.object({
+  q: z.string().optional(),
+  id: z.union([z.string(), z.array(z.string())]).optional(),
+});
+
+export const AdminGetBrandsParams = createFindParams({
+  offset: 0,
+  limit: 50,
+}).merge(AdminBrandsParamsFields);
+
 export const AdminGetBrandParams = createSelectParams();
 
 export const AdminCreateBrand = z
