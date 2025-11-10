@@ -10,10 +10,12 @@ import { useBrandTableQuery } from "./use-brand-table-query";
 import { useBrands } from "../../../../hooks/api/brands";
 import { keepPreviousData } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const PAGE_SIZE = 20;
 
 export const BrandListTable = () => {
+  const { t } = useTranslation();
   const [pagination, setPagination] = React.useState<DataTablePaginationState>({
     pageSize: PAGE_SIZE,
     pageIndex: 0,
@@ -46,7 +48,7 @@ export const BrandListTable = () => {
   return (
     <DataTable instance={table}>
       <DataTable.Toolbar>
-        <Heading>Brands</Heading>
+        <Heading>{t("brands.domain")}</Heading>
       </DataTable.Toolbar>
       <DataTable.Table />
       <DataTable.Pagination />
