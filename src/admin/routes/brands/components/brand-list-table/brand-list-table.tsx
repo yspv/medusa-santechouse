@@ -5,16 +5,18 @@ import {
   DataTable,
   DataTablePaginationState,
   Heading,
+  toast,
   useDataTable,
+  usePrompt,
 } from "@medusajs/ui";
 import { useBrandTableQuery } from "./use-brand-table-query";
-import { useBrands } from "../../../../hooks/api/brands";
+import { useBrands, useDeleteBrand } from "../../../../hooks/api/brands";
 import { keepPreviousData } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { AdminBrand } from "../../../../../types/http";
 import { ActionMenu } from "../../../../components/common/action-menu";
-import { PencilSquare } from "@medusajs/icons";
+import { PencilSquare, Trash } from "@medusajs/icons";
 
 const PAGE_SIZE = 20;
 
@@ -62,6 +64,25 @@ export const BrandListTable = () => {
 
 const BrandActions = ({ brand }: { brand: AdminBrand }) => {
   const { t } = useTranslation();
+  const prompt = usePrompt();
+  const { mutateAsync } = useDeleteBrand(brand.id);
+  const handleDelete = async () => {
+    const res = await prompt({
+      title: t("general.areYouSure"),
+      description: t("brands.delete.confirmation", { name: brand.name }),
+      confirmText: t("actions.delete"),
+      cancelText: t("actions.cancel"),
+    });
+    if (!res) return;
+    await mutateAsync(undefined, {
+      onSuccess: () => {
+        toast.success(t("brands.delete.successToast", { name: brand.name }));
+      },
+      onError: (error) => {
+        toast.error(error.message);
+      },
+    });
+  };
   return (
     <ActionMenu
       groups={[
@@ -71,6 +92,15 @@ const BrandActions = ({ brand }: { brand: AdminBrand }) => {
               icon: <PencilSquare />,
               label: t("actions.edit"),
               to: `/brands/${brand.id}/edit`,
+            },
+          ],
+        },
+        {
+          actions: [
+            {
+              icon: <Trash />,
+              label: t("actions.delete"),
+              onClick: handleDelete,
             },
           ],
         },
