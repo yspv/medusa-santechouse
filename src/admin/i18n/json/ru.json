@@ -1,5 +1,11 @@
 {
   "products": {
+    "brand": {
+      "edit": {
+        "header": "Редактировать бренд",
+        "successToast": "Бренд продукта {{title}} успешно обновлен."
+      }
+    },
     "fields": {
       "brand": {
         "label": "Бренд"
