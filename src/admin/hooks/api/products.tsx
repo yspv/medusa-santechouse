@@ -5,10 +5,10 @@ import {
   useMutation,
   UseMutationOptions,
   useQuery,
+  useQueryClient,
   UseQueryOptions,
 } from "@tanstack/react-query";
 import { sdk } from "../../lib/sdk";
-import { queryClient } from "../../lib/query-client";
 import { queryKeysFactory } from "../../lib/query-key-factory";
 import { inventoryItemsQueryKeys } from "./inventories.tsx";
 
@@ -25,6 +25,7 @@ export const useCreateProductOption = (
   productId: string,
   options?: UseMutationOptions<any, FetchError, any>,
 ) => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (payload: HttpTypes.AdminCreateProductOption) =>
       sdk.admin.product.createOption(productId, payload),
@@ -44,6 +45,7 @@ export const useUpdateProductOption = (
   optionId: string,
   options?: UseMutationOptions<any, FetchError, any>,
 ) => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (payload: HttpTypes.AdminUpdateProductOption) =>
       sdk.admin.product.updateOption(productId, optionId, payload),
@@ -67,6 +69,7 @@ export const useDeleteProductOption = (
   optionId: string,
   options?: UseMutationOptions<any, FetchError, void>,
 ) => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: () => sdk.admin.product.deleteOption(productId, optionId),
     onSuccess: (data: any, variables: any, context: any) => {
@@ -134,6 +137,7 @@ export const useCreateProductVariant = (
   productId: string,
   options?: UseMutationOptions<any, FetchError, any>,
 ) => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (payload: HttpTypes.AdminCreateProductVariant) =>
       sdk.admin.product.createVariant(productId, payload),
@@ -153,6 +157,7 @@ export const useUpdateProductVariant = (
   variantId: string,
   options?: UseMutationOptions<any, FetchError, any>,
 ) => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (payload: HttpTypes.AdminUpdateProductVariant) =>
       sdk.admin.product.updateVariant(productId, variantId, payload),
@@ -175,6 +180,7 @@ export const useUpdateProductVariantsBatch = (
   productId: string,
   options?: UseMutationOptions<any, FetchError, any>,
 ) => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (
       payload: HttpTypes.AdminBatchProductVariantRequest["update"],
@@ -203,6 +209,7 @@ export const useProductVariantsInventoryItemsBatch = (
     HttpTypes.AdminBatchProductVariantInventoryItemRequest
   >,
 ) => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (payload) =>
       sdk.admin.product.batchVariantInventoryItems(productId, payload),
@@ -224,6 +231,7 @@ export const useDeleteVariant = (
   variantId: string,
   options?: UseMutationOptions<any, FetchError, void>,
 ) => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: () => sdk.admin.product.deleteVariant(productId, variantId),
     onSuccess: (data: any, variables: any, context: any) => {
@@ -249,6 +257,7 @@ export const useDeleteVariantLazy = (
     { variantId: string }
   >,
 ) => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: ({ variantId }) =>
       sdk.admin.product.deleteVariant(productId, variantId),
@@ -317,6 +326,7 @@ export const useCreateProduct = (
     HttpTypes.AdminCreateProduct
   >,
 ) => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (payload) => sdk.admin.product.create(payload),
     onSuccess: (data, variables, context) => {
@@ -339,6 +349,7 @@ export const useUpdateProduct = (
     HttpTypes.AdminUpdateProduct
   >,
 ) => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (payload) => sdk.admin.product.update(id, payload),
     onSuccess: async (data, variables, context) => {
@@ -363,6 +374,7 @@ export const useDeleteProduct = (
     void
   >,
 ) => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: () => sdk.admin.product.delete(id),
     onSuccess: (data: any, variables: any, context: any) => {
@@ -429,6 +441,7 @@ export const useBatchImageVariants = (
     HttpTypes.AdminBatchImageVariantRequest
   >,
 ) => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (payload) =>
       sdk.admin.product.batchImageVariants(productId, imageId, payload),
@@ -454,6 +467,7 @@ export const useBatchVariantImages = (
     HttpTypes.AdminBatchVariantImagesRequest
   >,
 ) => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (payload) =>
       sdk.admin.product.batchVariantImages(productId, variantId, payload),
