@@ -352,14 +352,13 @@ export const useUpdateProduct = (
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (payload) => sdk.admin.product.update(id, payload),
-    onSuccess: async (data, variables, context) => {
-      await queryClient.invalidateQueries({
+    onSuccess: (data, variables, context) => {
+      queryClient.invalidateQueries({
         queryKey: productsQueryKeys.lists(),
       });
-      await queryClient.invalidateQueries({
+      queryClient.invalidateQueries({
         queryKey: productsQueryKeys.detail(id),
       });
-
       options?.onSuccess?.(data, variables, context);
     },
     ...options,
@@ -482,6 +481,31 @@ export const useBatchVariantImages = (
         queryKey: variantsQueryKeys.detail(variantId),
       });
 
+      options?.onSuccess?.(data, variables, context);
+    },
+    ...options,
+  });
+};
+
+export const useUpdateProductBrand = (
+  id: string,
+  options?: UseMutationOptions<
+    HttpTypes.AdminProductResponse,
+    FetchError,
+    string
+  >,
+) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (brand_id) =>
+      sdk.client.fetch(`/admin/products/${id}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: { additional_data: { brand_id } },
+      }),
+    onSuccess: (data, variables, context) => {
+      queryClient.invalidateQueries({ queryKey: productsQueryKeys.lists() });
+      queryClient.invalidateQueries({ queryKey: productsQueryKeys.detail(id) });
       options?.onSuccess?.(data, variables, context);
     },
     ...options,
