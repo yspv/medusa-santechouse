@@ -32,4 +32,11 @@ export const AdminUpdateBrand = z
     metadata: z.record(z.unknown()).nullish(),
   })
   .strict();
+
 export type AdminUpdateBrand = z.infer<typeof AdminUpdateBrand>;
+
+// Brand Products
+export const AdminBrandProductsParams = createFindParams({
+  offset: 0,
+  limit: 50,
+});

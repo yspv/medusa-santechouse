@@ -4,6 +4,7 @@ import {
   validateAndTransformQuery,
 } from "@medusajs/framework";
 import {
+  AdminBrandProductsParams,
   AdminCreateBrand,
   AdminGetBrandParams,
   AdminGetBrandsParams,
@@ -58,5 +59,15 @@ export const brandsMiddlewares: MiddlewareRoute[] = [
     method: ["DELETE"],
     matcher: "/admin/brands/:id",
     middlewares: [],
+  },
+  {
+    method: ["GET"],
+    matcher: "/admin/brands/:id/products",
+    middlewares: [
+      validateAndTransformQuery(
+        AdminBrandProductsParams,
+        QueryConfig.listBrandProductsConfig,
+      ),
+    ],
   },
 ];

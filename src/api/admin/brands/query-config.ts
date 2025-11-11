@@ -8,12 +8,21 @@ export const defaultAdminBrandsFields = [
   "metadata",
 ];
 
+export const defaultAdminBrandProductsFields = ["*product"];
+
 export const retrieveBrandConfig = {
   defaults: defaultAdminBrandsFields,
   isList: false,
 };
+
 export const listBrandConfig = {
   ...retrieveBrandConfig,
+  defaultLimit: 50,
+  isList: true,
+};
+
+export const listBrandProductsConfig = {
+  defaults: defaultAdminBrandProductsFields,
   defaultLimit: 50,
   isList: true,
 };
