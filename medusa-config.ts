@@ -13,9 +13,15 @@ module.exports = defineConfig({
       cookieSecret: process.env.COOKIE_SECRET || "supersecret",
     },
   },
+  featureFlags: {
+    index_engine: true,
+  },
   modules: [
     {
       resolve: "./src/modules/brand",
+    },
+    {
+      resolve: "@medusajs/index",
     },
   ],
 });
