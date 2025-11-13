@@ -449,7 +449,7 @@
           "nullable": false,
           "enumItems": [
             "earned",
-            "redeem",
+            "redeemed",
             "adjustment"
           ],
           "mappedType": "enum"

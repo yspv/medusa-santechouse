@@ -3,7 +3,7 @@ import { CashbackAccount } from "./cashback-account";
 
 export enum CashbackTransactionType {
   EARNED = "earned",
-  REDEEM = "redeem",
+  REDEEM = "redeemed",
   ADJUSTMENT = "adjustment",
 }
 
