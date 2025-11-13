@@ -131,6 +131,7 @@
           "autoincrement": false,
           "primary": false,
           "nullable": false,
+          "default": "0",
           "mappedType": "decimal"
         },
         "total_redeemed": {
@@ -140,6 +141,7 @@
           "autoincrement": false,
           "primary": false,
           "nullable": false,
+          "default": "0",
           "mappedType": "decimal"
         },
         "balance": {
@@ -149,6 +151,7 @@
           "autoincrement": false,
           "primary": false,
           "nullable": false,
+          "default": "0",
           "mappedType": "decimal"
         },
         "is_active": {
@@ -177,6 +180,7 @@
           "autoincrement": false,
           "primary": false,
           "nullable": false,
+          "default": "'{\"value\":\"0\",\"precision\":20}'",
           "mappedType": "json"
         },
         "raw_total_redeemed": {
@@ -186,6 +190,7 @@
           "autoincrement": false,
           "primary": false,
           "nullable": false,
+          "default": "'{\"value\":\"0\",\"precision\":20}'",
           "mappedType": "json"
         },
         "raw_balance": {
@@ -195,6 +200,7 @@
           "autoincrement": false,
           "primary": false,
           "nullable": false,
+          "default": "'{\"value\":\"0\",\"precision\":20}'",
           "mappedType": "json"
         },
         "created_at": {

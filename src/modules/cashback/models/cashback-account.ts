@@ -8,9 +8,9 @@ export const CashbackAccount = model.define("cashback_account", {
     mappedBy: "account",
   }),
   currency_code: model.text(),
-  total_earned: model.bigNumber(),
-  total_redeemed: model.bigNumber(),
-  balance: model.bigNumber(),
+  total_earned: model.bigNumber().default(0),
+  total_redeemed: model.bigNumber().default(0),
+  balance: model.bigNumber().default(0),
   is_active: model.boolean().default(false),
   metadata: model.json().nullable(),
 });
