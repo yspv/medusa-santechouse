@@ -2,9 +2,9 @@ import { model } from "@medusajs/framework/utils";
 import { CashbackAccount } from "./cashback-account";
 
 export enum CashbackTransactionType {
-  EARNED,
-  REDEEM,
-  ADJUSTMENT,
+  EARNED = "earned",
+  REDEEM = "redeem",
+  ADJUSTMENT = "adjustment",
 }
 
 export const CashbackTransaction = model.define("cashback_transaction", {
