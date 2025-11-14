@@ -11,7 +11,7 @@ export type CreateCashbackVariantLinkStepInput = {
 
 const buildLinks = (data: CreateCashbackVariantLinkStepInput) => {
   return data.links.map((entry) => ({
-    [Modules.PRODUCT]: { variant_id: entry.variant_id },
+    [Modules.PRODUCT]: { product_variant_id: entry.variant_id },
     [CASHBACK_MODULE]: { cashback_id: entry.cashback_id },
   }));
 };
