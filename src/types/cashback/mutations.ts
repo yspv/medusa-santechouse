@@ -30,7 +30,7 @@ export interface CreateCashbackTransactionDTO {
   type: CashbackTransactionType;
   currency_code: string;
   amount: number;
-  metadata: MetadataType;
+  metadata?: MetadataType;
 }
 
 export interface UpdateCashbackDTO {
