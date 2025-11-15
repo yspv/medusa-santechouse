@@ -6,3 +6,4 @@ export * from "./create-cashback-accounts";
 export * from "./create-cashback-account-customer-link";
 export * from "./update-cashback-accounts";
 export * from "./delete-cashback-accounts";
+export * from "./create-cashback-amounts";

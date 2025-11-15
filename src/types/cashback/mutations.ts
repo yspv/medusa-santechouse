@@ -8,6 +8,7 @@ export interface CreateCashbackDTO {
 }
 
 export interface CreateCashbackAmountDTO {
+  cashback_id?: string;
   currency_code: string;
   amount: number;
   is_active?: boolean;
