@@ -11,7 +11,7 @@ const stringToTransactionType = (value: string) => {
 };
 
 export const createCashbackTransactionsStepId = "create-cashback-transactions";
-export const createCashbackTransactions = createStep(
+export const createCashbackTransactionsStep = createStep(
   createCashbackTransactionsStepId,
   async (data: CreateCashbackTransactionDTO[], { container }) => {
     const service = container.resolve(CASHBACK_MODULE);
