@@ -32,4 +32,14 @@ export const cashbackMiddlewares: MiddlewareRoute[] = [
       ),
     ],
   },
+  {
+    method: ["GET"],
+    matcher: "/admin/cashbacks/:id",
+    middlewares: [
+      validateAndTransformQuery(
+        AdminCashbackParams,
+        QueryConfig.retrieveCashbackConfig,
+      ),
+    ],
+  },
 ];
