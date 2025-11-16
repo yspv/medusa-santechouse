@@ -10,7 +10,7 @@ export type UpdateCashbackAmountsWorkflowInput = {
   cashback_amounts: UpdateCashbackAmountDTO[];
 };
 
-export const updateCashbackAmountsWorkflowId = "update-cashbacks";
+export const updateCashbackAmountsWorkflowId = "update-cashback-amounts";
 
 export const updateCashbackAmountsWorkflow = createWorkflow(
   updateCashbackAmountsWorkflowId,
