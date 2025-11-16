@@ -3,10 +3,7 @@ import {
   validateAndTransformBody,
   validateAndTransformQuery,
 } from "@medusajs/framework";
-import {
-  AdminCashbackParams,
-  AdminCreateCashback,
-} from "./validators/cashback";
+import { AdminCashbackParams, AdminCreateCashback } from "./validators";
 import * as QueryConfig from "./query-config";
 
 export const cashbackMiddlewares: MiddlewareRoute[] = [
