@@ -1,6 +1,7 @@
 import { MetadataType } from "@medusajs/framework/types";
 
 export interface AdminCreateCashback {
+  variant_id: string;
   amounts: AdminCreateCashbackAmount[];
   is_active?: boolean;
   metadata?: MetadataType;
