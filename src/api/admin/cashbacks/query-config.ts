@@ -11,3 +11,9 @@ export const retrieveCashbackConfig = {
   defaults: defaultAdminCashbacksFields,
   isList: false,
 };
+
+export const listCashbackConfig = {
+  ...retrieveCashbackConfig,
+  defaultLimit: 50,
+  isList: true,
+};
