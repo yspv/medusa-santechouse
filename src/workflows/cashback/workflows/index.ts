@@ -4,3 +4,5 @@ export * from "./update-cashbacks";
 export * from "./create-cashback-amounts";
 export * from "./update-cashback-amounts";
 export * from "./update-cashback-accounts";
+export * from "./delete-cashbacks";
+export * from "./delete-cashback-amounts";
