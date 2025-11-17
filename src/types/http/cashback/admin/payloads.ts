@@ -14,6 +14,13 @@ export interface AdminCreateCashbackAmount {
   metadata?: MetadataType;
 }
 
+export interface AdminCreateCashbackAccount {
+  customer_id: string;
+  currency_code: string;
+  is_active?: boolean;
+  metadata?: MetadataType;
+}
+
 export interface AdminUpdateCashback {
   is_active?: boolean;
   metadata?: MetadataType;
@@ -22,5 +29,10 @@ export interface AdminUpdateCashback {
 export interface AdminUpdateCashbackAmount {
   currency_code?: string;
   amount?: number;
+  metadata?: MetadataType;
+}
+
+export interface AdminUpdateCashbackAccount {
+  is_active?: boolean;
   metadata?: MetadataType;
 }

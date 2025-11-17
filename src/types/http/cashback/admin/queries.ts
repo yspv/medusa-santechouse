@@ -1,4 +1,5 @@
 import {
+  FilterableCashbackAccountProps,
   FilterableCashbackAmountProps,
   FilterableCashbackProps,
 } from "@/types/cashback";
@@ -11,3 +12,7 @@ export interface AdminCashbackParams
 export interface AdminCashbackAmountParams
   extends FindParams,
     FilterableCashbackAmountProps {}
+
+export interface AdminCashbackAccountParams
+  extends FindParams,
+    FilterableCashbackAccountProps {}

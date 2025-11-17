@@ -1,5 +1,9 @@
 import { DeleteResponse, PaginatedResponse } from "@medusajs/framework/types";
-import { AdminCashback, AdminCashbackAmount } from "./entities";
+import {
+  AdminCashback,
+  AdminCashbackAccount,
+  AdminCashbackAmount,
+} from "./entities";
 
 export interface AdminCashbackResponse {
   cashback: AdminCashback;
@@ -20,3 +24,15 @@ export interface AdminCashbackAmountListResponse
 
 export interface AdminCashbackAmountDeleteResponse
   extends DeleteResponse<"cashback_amount"> {}
+
+export interface AdminCashbackAccountListResponse
+  extends PaginatedResponse<{
+    cashback_accounts: AdminCashbackAccount[];
+  }> {}
+
+export interface AdminCashbackAccountResponse {
+  cashback_account: AdminCashbackAccount;
+}
+
+export interface AdminCashbackAccountDeleteResponse
+  extends DeleteResponse<"cashback_account"> {}
