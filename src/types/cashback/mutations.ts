@@ -40,7 +40,6 @@ export interface UpdateCashbackDTO {
 }
 
 export interface UpdateCashbackAmountDTO {
-  id: string;
   currency_code?: string;
   amount?: number;
   is_active?: boolean;
@@ -55,4 +54,8 @@ export interface UpdateCashbackAccountDTO {
   balance?: number;
   is_active?: boolean;
   metadata?: MetadataType;
+}
+
+export interface UpsertCashbackAmountDTO extends UpdateCashbackAmountDTO {
+  id?: string;
 }
