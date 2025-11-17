@@ -14,3 +14,8 @@ export const AdminCreateCashback = z.object({
   metadata: z.record(z.unknown()).nullish(),
   is_active: z.boolean().optional(),
 });
+
+export const AdminUpdateCashback = z.object({
+  is_active: z.boolean().optional(),
+  metadata: z.record(z.undefined()).nullish(),
+});
