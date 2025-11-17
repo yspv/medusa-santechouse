@@ -40,14 +40,12 @@ export const POST = async (
   const cashbackId = req.params.id;
   const cashbackAmountId = req.params.amount_id;
   const filter = { id: cashbackAmountId, cashback_id: cashbackId };
-  const logger = req.scope.resolve("logger");
   await updateCashbackAmountsWorkflow(req.scope).run({
     input: {
       selector: filter,
       data: req.validatedBody,
     },
   });
-  logger.info("AFTER CASHBACK UPDATE");
   const cashback = await refetchEntity({
     entity: "cashback",
     idOrFilter: cashbackId,
