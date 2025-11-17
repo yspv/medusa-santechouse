@@ -105,4 +105,9 @@ export const cashbackMiddlewares: MiddlewareRoute[] = [
       ),
     ],
   },
+  {
+    method: ["DELETE"],
+    matcher: "/admin/cashbacks/:id/amounts/:amount_id",
+    middlewares: [],
+  },
 ];

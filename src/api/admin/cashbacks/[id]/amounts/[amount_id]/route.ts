@@ -1,4 +1,5 @@
 import {
+  AdminCashbackAmountDeleteResponse,
   AdminCashbackAmountParams,
   AdminCashbackAmountResponse,
   AdminCashbackResponse,
@@ -13,7 +14,10 @@ import {
   remapCashbackAmountResponse,
   remapCashbackResponse,
 } from "../../../helpers";
-import { updateCashbackAmountsWorkflow } from "@/workflows/cashback/workflows";
+import {
+  deleteCashbackAmountsWorkflow,
+  updateCashbackAmountsWorkflow,
+} from "@/workflows/cashback/workflows";
 
 export const GET = async (
   req: MedusaRequest<AdminCashbackAmountParams>,
@@ -53,4 +57,13 @@ export const POST = async (
     fields: req.queryConfig.fields,
   });
   res.json({ cashback: remapCashbackResponse(cashback as any) });
+};
+
+export const DELETE = async (
+  req: MedusaRequest,
+  res: MedusaResponse<AdminCashbackAmountDeleteResponse>,
+) => {
+  const id = req.params.amount_id;
+  await deleteCashbackAmountsWorkflow(req.scope).run({ input: { ids: [id] } });
+  res.json({ id, object: "cashback_amount", deleted: true });
 };
