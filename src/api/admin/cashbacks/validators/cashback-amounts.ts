@@ -1,5 +1,10 @@
-import { createFindParams } from "@medusajs/medusa/api/utils/validators";
+import {
+  createFindParams,
+  createSelectParams,
+} from "@medusajs/medusa/api/utils/validators";
 import z from "zod";
+
+export const AdminCashbackAmountParams = createSelectParams();
 
 export const AdminCashbackAmountsParams = createFindParams({
   offset: 0,
