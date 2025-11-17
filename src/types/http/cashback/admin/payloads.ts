@@ -13,3 +13,8 @@ export interface AdminCreateCashbackAmount {
   is_active?: boolean;
   metadata?: MetadataType;
 }
+
+export interface AdminUpdateCashback {
+  is_active?: boolean;
+  metadata?: MetadataType;
+}
