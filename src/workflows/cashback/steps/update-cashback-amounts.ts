@@ -1,7 +1,5 @@
-import { listCashbackAmountConfig } from "@/api/admin/cashbacks/query-config";
 import { CASHBACK_MODULE } from "@/modules/cashback";
 import {
-  CashbackAmountDTO,
   FilterableCashbackAmountProps,
   UpdateCashbackAmountDTO,
   UpsertCashbackAmountDTO,
@@ -25,6 +23,7 @@ export const updateCashbackAmountsStep = createStep(
   updateCashbackAmountsStepId,
   async (data: UpdateCashbackAmountsStepInput, { container }) => {
     const service = container.resolve(CASHBACK_MODULE);
+    const logger = container.resolve("logger");
     if ("cashback_amounts" in data) {
       if (data.cashback_amounts.some((c) => !c.id)) {
         throw new MedusaError(
@@ -43,13 +42,13 @@ export const updateCashbackAmountsStep = createStep(
     const { selects, relations } = getSelectsAndRelationsFromObjectArray([
       data.data,
     ]);
-    const prevData = await service.listCashbackAmounts(selects, {
+    const prevData = await service.listCashbackAmounts(data.selector, {
       select: selects,
       relations,
     });
     const updated = await service.updateCashbackAmounts({
-      data: data.data,
       selector: data.selector,
+      data: data.data,
     });
     return new StepResponse(updated, prevData);
   },
