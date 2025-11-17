@@ -16,3 +16,9 @@ export const AdminCreateCashbackAmount = z.object({
   amount: z.number().positive(),
   metadata: z.record(z.unknown()).nullish(),
 });
+
+export const AdminUpdateCashbackAmount = z.object({
+  currency_code: z.string().optional(),
+  amount: z.number().positive().optional(),
+  metadata: z.record(z.unknown()).nullish(),
+});

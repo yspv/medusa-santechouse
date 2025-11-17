@@ -11,6 +11,7 @@ import {
   AdminCreateCashback,
   AdminCreateCashbackAmount,
   AdminUpdateCashback,
+  AdminUpdateCashbackAmount,
 } from "./validators";
 import * as QueryConfig from "./query-config";
 
@@ -90,6 +91,17 @@ export const cashbackMiddlewares: MiddlewareRoute[] = [
       validateAndTransformQuery(
         AdminCashbackAmountParams,
         QueryConfig.retrieveCashbackAmountConfig,
+      ),
+    ],
+  },
+  {
+    method: ["POST"],
+    matcher: "/admin/cashbacks/:id/amounts/:amount_id",
+    middlewares: [
+      validateAndTransformBody(AdminUpdateCashbackAmount),
+      validateAndTransformQuery(
+        AdminCashbackParams,
+        QueryConfig.retrieveCashbackConfig,
       ),
     ],
   },

@@ -18,3 +18,9 @@ export interface AdminUpdateCashback {
   is_active?: boolean;
   metadata?: MetadataType;
 }
+
+export interface AdminUpdateCashbackAmount {
+  currency_code?: string;
+  amount?: number;
+  metadata?: MetadataType;
+}
