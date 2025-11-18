@@ -20,7 +20,6 @@ export type AdminCashbackAccount = Omit<
   CashbackAccountDTO,
   "customer" | "transactions"
 > & {
-  customer?: AdminCustomer | null;
   transactions?: AdminCashbackTransaction[] | null;
 };
 
