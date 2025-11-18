@@ -54,4 +54,9 @@ export const cashbackAccountMiddlewares: MiddlewareRoute[] = [
       ),
     ],
   },
+  {
+    method: ["DELETE"],
+    matcher: "/admin/cashback-accounts/:id",
+    middlewares: [],
+  },
 ];
