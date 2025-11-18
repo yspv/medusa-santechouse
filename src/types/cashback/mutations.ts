@@ -47,7 +47,6 @@ export interface UpdateCashbackAmountDTO {
 }
 
 export interface UpdateCashbackAccountDTO {
-  id: string;
   currency_code?: string;
   total_earned?: number;
   total_redeemed?: number;
@@ -57,5 +56,9 @@ export interface UpdateCashbackAccountDTO {
 }
 
 export interface UpsertCashbackAmountDTO extends UpdateCashbackAmountDTO {
+  id?: string;
+}
+
+export interface UpsertCashbackAccountDTO extends UpdateCashbackAccountDTO {
   id?: string;
 }
