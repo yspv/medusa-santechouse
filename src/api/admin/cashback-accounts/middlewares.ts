@@ -5,7 +5,9 @@ import {
 } from "@medusajs/framework";
 import {
   AdminCashbackAccountParams,
+  AdminCashbackAccountsParams,
   AdminCreateCashbackAccount,
+  AdminUpdateCashbackAccount,
 } from "./validators";
 import * as QueryConfig from "./query-config";
 
@@ -15,7 +17,7 @@ export const cashbackAccountMiddlewares: MiddlewareRoute[] = [
     matcher: "/admin/cashback-accounts",
     middlewares: [
       validateAndTransformQuery(
-        AdminCashbackAccountParams,
+        AdminCashbackAccountsParams,
         QueryConfig.listCashbackAccountsConfig,
       ),
     ],
@@ -35,6 +37,17 @@ export const cashbackAccountMiddlewares: MiddlewareRoute[] = [
     method: ["GET"],
     matcher: "/admin/cashback-accounts/:id",
     middlewares: [
+      validateAndTransformQuery(
+        AdminCashbackAccountParams,
+        QueryConfig.retrieveCashbackAccountConfig,
+      ),
+    ],
+  },
+  {
+    method: ["POST"],
+    matcher: "/admin/cashback-accounts/:id",
+    middlewares: [
+      validateAndTransformBody(AdminUpdateCashbackAccount),
       validateAndTransformQuery(
         AdminCashbackAccountParams,
         QueryConfig.retrieveCashbackAccountConfig,
