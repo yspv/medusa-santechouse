@@ -21,7 +21,7 @@ export const createCashbackAccountsWorkflow = createWorkflow(
   (input: WorkflowData<CreateCashbackAccountsWorkflowInput>) => {
     const created = createCashbackAccountsStep(input.accounts);
     const accountAndCustomerLinks = transform({ created, input }, (data) => {
-      return created.map((account, index) => {
+      return data.created.map((account, index) => {
         const account_id = account.id;
         const customer_id = data.input.accounts[index].customer_id;
         return { account_id, customer_id };
