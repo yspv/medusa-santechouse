@@ -11,6 +11,16 @@ import * as QueryConfig from "./query-config";
 
 export const cashbackAccountMiddlewares: MiddlewareRoute[] = [
   {
+    method: ["GET"],
+    matcher: "/admin/cashback-accounts",
+    middlewares: [
+      validateAndTransformQuery(
+        AdminCashbackAccountParams,
+        QueryConfig.listCashbackAccountsConfig,
+      ),
+    ],
+  },
+  {
     method: ["POST"],
     matcher: "/admin/cashback-accounts",
     middlewares: [
