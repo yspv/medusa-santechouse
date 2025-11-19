@@ -35,16 +35,13 @@ export const creditCashbackStep = createStep(
   },
   async (data, { container }) => {
     if (!data) return;
-    const { account } = data;
     const service = container.resolve(CASHBACK_MODULE);
     const locking = container.resolve(Modules.LOCKING);
     await service.deleteCashbackTransactions(data.transaction.id);
     await locking.execute(data.account.id, async () => {
       await service.updateCashbackAccounts({
-        id: account.id,
-        total_earned: account.total_earned,
-        total_redeemed: account.total_redeemed,
-        balance: account.balance,
+        ...data.account,
+        transactions: undefined,
       });
     });
   },
