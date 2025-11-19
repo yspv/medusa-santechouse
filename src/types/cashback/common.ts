@@ -3,6 +3,8 @@ import {
   MetadataType,
   CustomerDTO,
   BaseFilterable,
+  FilterableProductVariantProps,
+  FilterableCustomerProps,
 } from "@medusajs/framework/types";
 
 export type CashbackTransactionType = "earned" | "redeemed" | "adjustment";
@@ -11,6 +13,7 @@ export interface FilterableCashbackProps
   extends BaseFilterable<FilterableCashbackProps> {
   id?: string | string[];
   is_active?: boolean;
+  product_variant?: FilterableProductVariantProps;
 }
 
 export interface FilterableCashbackAmountProps
@@ -23,6 +26,7 @@ export interface FilterableCashbackAmountProps
 export interface FilterableCashbackAccountProps
   extends BaseFilterable<FilterableCashbackAccountProps> {
   id?: string | string[];
+  customer?: FilterableCustomerProps;
   currency_code?: string | string[];
   is_active?: boolean;
 }
@@ -36,7 +40,7 @@ export interface FilterableCashbackTransactionProps
 
 export interface CashbackDTO {
   id: string;
-  product_varaint?: ProductVariantDTO | null;
+  product_variant?: ProductVariantDTO | null;
   amounts: CashbackAmountDTO[];
   is_active: boolean;
   metadata: MetadataType;
@@ -46,7 +50,7 @@ export interface CashbackAmountDTO {
   id: string;
   cashback?: CashbackDTO;
   currency_code: string;
-  amount: string;
+  amount: number;
   is_active: boolean;
   metadata: MetadataType;
 }
