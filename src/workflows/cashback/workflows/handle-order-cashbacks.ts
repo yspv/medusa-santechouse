@@ -42,7 +42,10 @@ export const handleOrderCashbacksWorkflow = createWorkflow(
       fields: ["product_variant_id", "cashback.*", "cashback.amounts.*"],
       filters: { product_variant_id: variantIds as string[] },
     }).config({ name: "cashbacks-query-graphq" });
-    const total = transform({ order, cashbacks }, (data) => {
+    const activeCashbacks = transform({ cashbacks }, (data) => {
+      return data.cashbacks.filter((c) => !!c.cashback?.is_active);
+    });
+    const total = transform({ order, cashbacks: activeCashbacks }, (data) => {
       const items = data.order.items || [];
       return data.cashbacks.reduce((acc, { cashback, product_variant_id }) => {
         const amount = cashback!.amounts.find(
