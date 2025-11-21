@@ -6,6 +6,11 @@ import z from "zod";
 
 export const AdminCashbackAccountParams = createSelectParams();
 export const AdminCashbackAccountsParams = createFindParams();
+export const AdminCashbackTransactionParams = createSelectParams();
+export const AdminCashbackTransactionsParams = createFindParams({
+  offset: 0,
+  limit: 50,
+});
 
 export const AdminCreateCashbackAccount = z.object({
   customer_id: z.string(),

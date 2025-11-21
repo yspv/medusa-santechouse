@@ -11,6 +11,16 @@ export const defualtAdminCashbackAccountsFields = [
   "updated_at",
 ];
 
+export const defaultAdminCashbackTransactionsFields = [
+  "id",
+  "type",
+  "amount",
+  "reference_id",
+  "currency_code",
+  "metadata",
+  "created_at",
+];
+
 export const retrieveCashbackAccountConfig = {
   defaults: defualtAdminCashbackAccountsFields,
   isList: false,
@@ -18,6 +28,17 @@ export const retrieveCashbackAccountConfig = {
 
 export const listCashbackAccountsConfig = {
   ...retrieveCashbackAccountConfig,
+  defaultLimit: 50,
+  isList: true,
+};
+
+export const retrieveCashbackTransactionConfig = {
+  defaults: defaultAdminCashbackTransactionsFields,
+  isList: false,
+};
+
+export const listCashbackTransactionConfig = {
+  ...retrieveCashbackTransactionConfig,
   defaultLimit: 50,
   isList: true,
 };

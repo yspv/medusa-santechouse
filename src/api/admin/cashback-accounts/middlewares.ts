@@ -6,6 +6,7 @@ import {
 import {
   AdminCashbackAccountParams,
   AdminCashbackAccountsParams,
+  AdminCashbackTransactionsParams,
   AdminCreateCashbackAccount,
   AdminUpdateCashbackAccount,
 } from "./validators";
@@ -58,5 +59,15 @@ export const cashbackAccountMiddlewares: MiddlewareRoute[] = [
     method: ["DELETE"],
     matcher: "/admin/cashback-accounts/:id",
     middlewares: [],
+  },
+  {
+    method: ["GET"],
+    matcher: "/admin/cashback-accounts/:id/transactions",
+    middlewares: [
+      validateAndTransformQuery(
+        AdminCashbackTransactionsParams,
+        QueryConfig.listCashbackTransactionConfig,
+      ),
+    ],
   },
 ];
