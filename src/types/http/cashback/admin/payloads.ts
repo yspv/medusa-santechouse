@@ -41,3 +41,8 @@ export interface AdminRedeemCashback {
   order_id: string;
   amount: number;
 }
+
+export interface AdminAdjustmentCashbackAccountBalance {
+  account_id: string;
+  amount: number;
+}
