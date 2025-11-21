@@ -43,6 +43,5 @@ export interface AdminRedeemCashback {
 }
 
 export interface AdminAdjustmentCashbackAccountBalance {
-  account_id: string;
   amount: number;
 }

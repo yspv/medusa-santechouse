@@ -23,3 +23,7 @@ export const AdminUpdateCashbackAccount = z.object({
   is_active: z.boolean().optional(),
   metadata: z.record(z.unknown()).nullish(),
 });
+
+export const AdminAdjustmentCashbackAccountBalance = z.object({
+  amount: z.number(),
+});

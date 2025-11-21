@@ -4,6 +4,7 @@ import {
   validateAndTransformQuery,
 } from "@medusajs/framework";
 import {
+  AdminAdjustmentCashbackAccountBalance,
   AdminCashbackAccountParams,
   AdminCashbackAccountsParams,
   AdminCashbackTransactionsParams,
@@ -67,6 +68,17 @@ export const cashbackAccountMiddlewares: MiddlewareRoute[] = [
       validateAndTransformQuery(
         AdminCashbackTransactionsParams,
         QueryConfig.listCashbackTransactionConfig,
+      ),
+    ],
+  },
+  {
+    method: ["POST"],
+    matcher: "/admin/cashback-accounts/adjustment",
+    middlewares: [
+      validateAndTransformBody(AdminAdjustmentCashbackAccountBalance),
+      validateAndTransformQuery(
+        AdminAdjustmentCashbackAccountBalance,
+        QueryConfig.retrieveCashbackAccountConfig,
       ),
     ],
   },
