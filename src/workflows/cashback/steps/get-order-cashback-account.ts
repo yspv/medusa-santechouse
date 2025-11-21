@@ -16,6 +16,12 @@ export const getOrderCashbackAccountStep = createStep(
         `Customer does not have cashback account with ${order.currency_code} currency`,
       );
     }
+    if (!account.is_active) {
+      throw new MedusaError(
+        MedusaError.Types.INVALID_DATA,
+        `Customer cashback account with ${order.currency_code} is inactive`,
+      );
+    }
     return new StepResponse(account);
   },
 );
