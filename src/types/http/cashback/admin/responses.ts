@@ -42,6 +42,7 @@ export interface AdminCashbackTransactionResponse {
   cashback_transaction: AdminCashbackTransaction;
 }
 
-export interface AdminCashbackTransactionListResponse {
-  cashback_transactions: AdminCashbackTransaction[];
-}
+export interface AdminCashbackTransactionListResponse
+  extends PaginatedResponse<{
+    cashback_transactions: AdminCashbackTransaction[];
+  }> {}
