@@ -35,7 +35,10 @@ export const redeemCashbackStep = createStep(
         balance: account.balance - data.amount,
       });
     });
-    return new StepResponse(updated, { account, transaction });
+    return new StepResponse(
+      { account: updated, transaction },
+      { account, transaction },
+    );
   },
   async (data, { container }) => {
     if (!data) return;
