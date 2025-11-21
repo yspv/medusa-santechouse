@@ -3,6 +3,7 @@ import {
   AdminCashback,
   AdminCashbackAccount,
   AdminCashbackAmount,
+  AdminCashbackTransaction,
 } from "./entities";
 
 export interface AdminCashbackResponse {
@@ -36,3 +37,11 @@ export interface AdminCashbackAccountResponse {
 
 export interface AdminCashbackAccountDeleteResponse
   extends DeleteResponse<"cashback_account"> {}
+
+export interface AdminCashbackTransactionResponse {
+  cashback_transaction: AdminCashbackTransaction;
+}
+
+export interface AdminCashbackTransactionListResponse {
+  cashback_transactions: AdminCashbackTransaction[];
+}

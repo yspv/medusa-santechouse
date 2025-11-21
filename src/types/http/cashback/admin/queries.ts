@@ -2,6 +2,7 @@ import {
   FilterableCashbackAccountProps,
   FilterableCashbackAmountProps,
   FilterableCashbackProps,
+  FilterableCashbackTransactionProps,
 } from "@/types/cashback";
 import { FindParams } from "@medusajs/framework/types";
 
@@ -16,3 +17,7 @@ export interface AdminCashbackAmountParams
 export interface AdminCashbackAccountParams
   extends FindParams,
     FilterableCashbackAccountProps {}
+
+export interface AdminCashbackTransactionParams
+  extends FindParams,
+    FilterableCashbackTransactionProps {}
