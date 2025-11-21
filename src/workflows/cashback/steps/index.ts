@@ -14,3 +14,4 @@ export * from "./credit-cashback";
 export * from "./redeem-cashback";
 export * from "./get-order-cashback-account";
 export * from "./validate-cashback-account-balance";
+export * from "./adjustment-cashback-account-balance";
