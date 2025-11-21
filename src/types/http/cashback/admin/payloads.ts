@@ -36,3 +36,8 @@ export interface AdminUpdateCashbackAccount {
   is_active?: boolean;
   metadata?: MetadataType;
 }
+
+export interface AdminRedeemCashback {
+  order_id: string;
+  amount: number;
+}
