@@ -7,7 +7,7 @@ export const adminPriceConversionsFields = [
 ];
 
 export const retrievePriceConversionConfig = {
-  fields: adminPriceConversionsFields,
+  defaults: adminPriceConversionsFields,
   isList: false,
 };
 
