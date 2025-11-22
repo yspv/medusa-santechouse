@@ -26,5 +26,8 @@ module.exports = defineConfig({
     {
       resolve: "@medusajs/index",
     },
+    {
+      resolve: './src/modules/price-conversion'
+    }
   ],
 });
