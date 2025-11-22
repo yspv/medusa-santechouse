@@ -1,8 +1,13 @@
 import {
   MiddlewareRoute,
+  validateAndTransformBody,
   validateAndTransformQuery,
 } from "@medusajs/framework";
-import { AdminPriceConversionsParams } from "./validators";
+import {
+  AdminPriceConversion,
+  AdminPriceConversionParams,
+  AdminPriceConversionsParams,
+} from "./validators";
 import * as QueryConfig from "./query-config";
 
 export const priceConversionMiddlewares: MiddlewareRoute[] = [
@@ -13,6 +18,17 @@ export const priceConversionMiddlewares: MiddlewareRoute[] = [
       validateAndTransformQuery(
         AdminPriceConversionsParams,
         QueryConfig.listPriceConversionsConfig,
+      ),
+    ],
+  },
+  {
+    method: ["POST"],
+    matcher: "/admin/price-conversions",
+    middlewares: [
+      validateAndTransformBody(AdminPriceConversion),
+      validateAndTransformQuery(
+        AdminPriceConversionParams,
+        QueryConfig.retrievePriceConversionConfig,
       ),
     ],
   },

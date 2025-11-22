@@ -1,12 +1,15 @@
 import {
+  AdminPriceConversionInput,
   AdminPriceConversionListResponse,
   AdminPriceConversionParams,
+  AdminPriceConversionResponse,
 } from "@/types/http/price-conversion";
 import { priceConversionWorkflow } from "@/workflows/price-conversion/workflows";
 import {
   MedusaRequest,
   MedusaResponse,
   refetchEntities,
+  refetchEntity,
 } from "@medusajs/framework";
 
 export const GET = async (
@@ -29,9 +32,19 @@ export const GET = async (
   });
 };
 
-export const POST = async (req: MedusaRequest, res: MedusaResponse) => {
-  await priceConversionWorkflow(req.scope).run({
-    input: { price_conversion: { from: "uzs", to: "usd", rate: 0.001 } },
+export const POST = async (
+  req: MedusaRequest<AdminPriceConversionInput, AdminPriceConversionParams>,
+  res: MedusaResponse<AdminPriceConversionResponse>,
+) => {
+  const payload = req.validatedBody;
+  const { result } = await priceConversionWorkflow(req.scope).run({
+    input: { price_conversion: payload },
   });
-  res.json({ status: "ok" });
+  const priceConversion = await refetchEntity({
+    entity: "price_conversion",
+    idOrFilter: result.id,
+    scope: req.scope,
+    fields: req.queryConfig.fields,
+  });
+  res.json({ price_conversion: priceConversion });
 };
