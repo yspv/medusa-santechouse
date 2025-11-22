@@ -21,7 +21,6 @@ export const GET = async (
     pagination: req.queryConfig.pagination,
     withDeleted: req.queryConfig.withDeleted,
   });
-  console.log(data);
   res.json({
     price_conversions: data,
     count: metadata.count,
