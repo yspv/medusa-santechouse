@@ -6,6 +6,11 @@
         "successToast": "Бренд продукта {{title}} успешно обновлен."
       }
     },
+    "variant": {
+      "cashback": {
+        "header": "Кэшбек"
+      }
+    },
     "fields": {
       "brand": {
         "label": "Бренд"
