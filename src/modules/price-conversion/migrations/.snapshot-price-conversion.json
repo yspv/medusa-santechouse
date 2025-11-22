@@ -35,21 +35,12 @@
         },
         "rate": {
           "name": "rate",
-          "type": "numeric",
+          "type": "real",
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
           "nullable": false,
-          "mappedType": "decimal"
-        },
-        "raw_rate": {
-          "name": "raw_rate",
-          "type": "jsonb",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "mappedType": "json"
+          "mappedType": "float"
         },
         "created_at": {
           "name": "created_at",
