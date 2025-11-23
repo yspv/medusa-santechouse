@@ -11,6 +11,10 @@ import {
   TypeCell,
   TypeHeader,
 } from "@/components/table/table-cells/cashback-transaction";
+import {
+  DateCell,
+  DateHeader,
+} from "@/components/table/table-cells/common/date-cell";
 
 const columnHelper = createDataTableColumnHelper<AdminCashbackTransaction>();
 
@@ -33,6 +37,10 @@ export const useCashbackTransactionTableColumns = () => {
             currencyCode={row.original.currency_code}
           />
         ),
+      }),
+      columnHelper.accessor("created_at", {
+        header: () => <DateHeader />,
+        cell: ({ row }) => <DateCell date={row.original.created_at} />,
       }),
       columnHelper.accessor("reference_id", {
         header: () => <ReferenceHeader />,
