@@ -22,6 +22,10 @@ import {
   TotalRedeemedCell,
   TotalRedeemedHeader,
 } from "@/components/table/table-cells/cashback-account/total-redeemed-cell";
+import {
+  CurrencyCell,
+  CurrencyHeader,
+} from "@/components/table/table-cells/cashback-account/currency-cell";
 
 const columnHelper = createDataTableColumnHelper<AdminCashbackAccount>();
 
@@ -32,6 +36,12 @@ export const useCashbackAccountColumns = () => {
       columnHelper.accessor("customer", {
         header: () => <CustomerHeader />,
         cell: ({ row }) => <CustomerCell customer={row.original.customer} />,
+      }),
+      columnHelper.accessor("currency_code", {
+        header: () => <CurrencyHeader />,
+        cell: ({ row }) => (
+          <CurrencyCell currencyCode={row.original.currency_code} />
+        ),
       }),
       columnHelper.accessor("total_earned", {
         header: () => <TotalEarnedHeader />,
