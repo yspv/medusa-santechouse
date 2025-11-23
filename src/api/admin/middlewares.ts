@@ -4,6 +4,7 @@ import { productsMiddlewares } from "./products/middlewares";
 import { cashbackMiddlewares } from "./cashbacks/middlewares";
 import { cashbackAccountMiddlewares } from "./cashback-accounts/middlewares";
 import { priceConversionMiddlewares } from "./price-conversions/middlewares";
+import { cashbackTransactionMiddlewares } from "./cashback-transactions/middlewares";
 
 export const adminMiddlewares: MiddlewareRoute[] = [
   ...brandsMiddlewares,
@@ -11,4 +12,5 @@ export const adminMiddlewares: MiddlewareRoute[] = [
   ...productsMiddlewares,
   ...cashbackAccountMiddlewares,
   ...priceConversionMiddlewares,
+  ...cashbackTransactionMiddlewares,
 ];
