@@ -1,8 +1,18 @@
 import { loadEnv, defineConfig } from "@medusajs/framework/utils";
+import path from "path";
 
 loadEnv(process.env.NODE_ENV || "development", process.cwd());
 
 module.exports = defineConfig({
+  admin: {
+    vite: () => ({
+      resolve: {
+        alias: {
+          "@": path.resolve(__dirname, "./src/admin"),
+        },
+      },
+    }),
+  },
   projectConfig: {
     databaseUrl: process.env.DATABASE_URL,
     http: {
@@ -27,7 +37,7 @@ module.exports = defineConfig({
       resolve: "@medusajs/index",
     },
     {
-      resolve: './src/modules/price-conversion'
-    }
+      resolve: "./src/modules/price-conversion",
+    },
   ],
 });
