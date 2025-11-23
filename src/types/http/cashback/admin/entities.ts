@@ -24,4 +24,7 @@ export type AdminCashbackAccount = Omit<
 };
 
 export type AdminCashbackTransactionType = CashbackTransactionType;
-export type AdminCashbackTransaction = CashbackTransactionDTO;
+export interface AdminCashbackTransaction
+  extends Omit<CashbackTransactionDTO, "account"> {
+  account?: AdminCashbackAccount | null;
+}
