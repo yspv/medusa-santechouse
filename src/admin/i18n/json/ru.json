@@ -47,5 +47,16 @@
         "inactive": "Неактивный"
       }
     }
+  },
+  "cashbacks": {
+    "domain": "Кэшбек"
+  },
+  "cashback-accounts": {
+    "domain": "Кэшбек аккаунты",
+    "fields": {
+      "balance": "Баланс",
+      "total_earned": "Заработанная сумма",
+      "total_redeemed": "Потраченная сумма"
+    }
   }
 }
