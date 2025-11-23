@@ -58,5 +58,25 @@
       "total_earned": "Заработанная сумма",
       "total_redeemed": "Потраченная сумма"
     }
+  },
+  "cashback-transactions": {
+    "domain": "Операции с кэшбэком",
+    "fields": {
+      "account": {
+        "label": "Расчетный счет"
+      },
+      "reference": {
+        "label": "Ссылка"
+      },
+      "type": {
+        "label": "Тип",
+        "earned": "Начисление",
+        "redeemed": "Списание",
+        "adjustment": "Корректировка"
+      },
+      "amount": {
+        "label": "Сумма"
+      }
+    }
   }
 }
