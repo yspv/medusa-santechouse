@@ -1,8 +1,17 @@
-import { QueryKey, useQuery, UseQueryOptions } from "@tanstack/react-query";
+import {
+  QueryKey,
+  useMutation,
+  UseMutationOptions,
+  useQuery,
+  useQueryClient,
+  UseQueryOptions,
+} from "@tanstack/react-query";
 import { queryKeysFactory } from "@/lib/query-key-factory";
 import {
+  AdminPriceConversionInput,
   AdminPriceConversionListResponse,
   AdminPriceConversionParams,
+  AdminPriceConversionResponse,
 } from "@/types";
 import { FetchError } from "@medusajs/js-sdk";
 import { sdk } from "@/lib/sdk";
@@ -34,4 +43,29 @@ export const usePriceConversions = (
     ...options,
   });
   return { ...data, ...rest };
+};
+
+export const useCreatePriceConversion = (
+  options?: UseMutationOptions<
+    AdminPriceConversionResponse,
+    FetchError,
+    AdminPriceConversionInput
+  >,
+) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (payload) =>
+      sdk.client.fetch("/admin/price-conversions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: payload,
+      }),
+    onSuccess: (data, variables, context) => {
+      queryClient.invalidateQueries({
+        queryKey: priceConversionQueryKeys.lists(),
+      });
+      options?.onSuccess?.(data, variables, context);
+    },
+    ...options,
+  });
 };
