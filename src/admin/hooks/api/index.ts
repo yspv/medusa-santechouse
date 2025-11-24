@@ -7,3 +7,4 @@ export * from "./sales-channels";
 export * from "./cashback";
 export * from "./cashback-accounts";
 export * from "./price-conversion";
+export * from "./store";
