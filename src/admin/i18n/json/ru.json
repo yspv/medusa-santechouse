@@ -81,6 +81,9 @@
   },
   "price-conversions": {
     "domain": "Конвертация цены",
+    "create": {
+      "header": "Создать конвертацию цены"
+    },
     "fields": {
       "from": {
         "label": "Исходная валюта"
