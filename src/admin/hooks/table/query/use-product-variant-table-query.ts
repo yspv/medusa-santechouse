@@ -12,7 +12,7 @@ export const useProductVariantTableQuery = ({
   const raw = useQueryParams(["q", "order", "offset"], prefix);
   const searchParams = {
     limit: pageSize,
-    offset: raw.offset || 0,
+    offset: raw.offset ? Number(raw.offset) : 0,
     order: raw.order,
     q: raw.q,
     fields: DEFAULT_FIELDS,
