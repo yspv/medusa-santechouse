@@ -1,4 +1,5 @@
 import {
+  Button,
   DataTable,
   DataTablePaginationState,
   Heading,
@@ -9,7 +10,7 @@ import { usePriceConversionTableQuery } from "@/hooks/table/query";
 import { useTranslation } from "react-i18next";
 import React from "react";
 import { usePriceConversions } from "@/hooks/api";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const PAGE_SIZE = 20;
 
@@ -44,7 +45,14 @@ export const PriceConversionsListTable = () => {
   return (
     <DataTable instance={table}>
       <DataTable.Toolbar>
-        <Heading>{t("price-conversions.domain")}</Heading>
+        <div className="flex justify-between w-full items-center">
+          <Heading>{t("price-conversions.domain")}</Heading>
+          <Link to="create">
+            <Button size="small" variant="secondary">
+              {t("actions.create")}
+            </Button>
+          </Link>
+        </div>
       </DataTable.Toolbar>
       <DataTable.Table />
       <DataTable.Pagination />
