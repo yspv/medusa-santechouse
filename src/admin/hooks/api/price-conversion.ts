@@ -71,12 +71,11 @@ export const useCreatePriceConversion = (
 };
 
 export const useConfirmPriceConversion = (
-  transactionId: string,
-  options?: UseMutationOptions<unknown, FetchError, unknown>,
+  options?: UseMutationOptions<unknown, FetchError, string>,
 ) => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: () =>
+    mutationFn: (transactionId) =>
       sdk.client.fetch(`/admin/price-conversions/${transactionId}/confirm`),
     onSuccess: (data, variables, context) => {
       queryClient.invalidateQueries({
