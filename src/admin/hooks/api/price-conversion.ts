@@ -76,7 +76,9 @@ export const useConfirmPriceConversion = (
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (transactionId) =>
-      sdk.client.fetch(`/admin/price-conversions/${transactionId}/confirm`),
+      sdk.client.fetch(`/admin/price-conversions/${transactionId}/confirm`, {
+        method: "POST",
+      }),
     onSuccess: (data, variables, context) => {
       queryClient.invalidateQueries({
         queryKey: priceConversionQueryKeys.lists(),
