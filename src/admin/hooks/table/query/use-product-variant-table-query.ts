@@ -1,6 +1,6 @@
 import { useQueryParams } from "@/hooks/use-query-params";
 
-const DEFAULT_FIELDS = "id,sku,title,created_at";
+const DEFAULT_FIELDS = "+product.*";
 
 export const useProductVariantTableQuery = ({
   prefix,
