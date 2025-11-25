@@ -2,7 +2,7 @@ import { AdminPriceConversion } from "./entities";
 import { PaginatedResponse } from "@medusajs/framework/types";
 
 export interface AdminPriceConversionResponse {
-  price_conversion: AdminPriceConversion;
+  transaction_id: string;
 }
 
 export interface AdminPriceConversionListResponse

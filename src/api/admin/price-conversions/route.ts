@@ -9,7 +9,6 @@ import {
   MedusaRequest,
   MedusaResponse,
   refetchEntities,
-  refetchEntity,
 } from "@medusajs/framework";
 
 export const GET = async (
@@ -37,14 +36,10 @@ export const POST = async (
   res: MedusaResponse<AdminPriceConversionResponse>,
 ) => {
   const payload = req.validatedBody;
-  const { result } = await priceConversionWorkflow(req.scope).run({
+  const { result, transaction } = await priceConversionWorkflow(req.scope).run({
     input: { price_conversion: payload },
   });
-  const priceConversion = await refetchEntity({
-    entity: "price_conversion",
-    idOrFilter: result.id,
-    scope: req.scope,
-    fields: req.queryConfig.fields,
+  res.status(202).json({
+    transaction_id: transaction.transactionId,
   });
-  res.json({ price_conversion: priceConversion });
 };
