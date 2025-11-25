@@ -1,9 +1,18 @@
 import {
   AdminCashbackListResponse,
   AdminCashbackParams,
+  AdminCashbackResponse,
+  AdminCreateCashback,
 } from "../../../types/http";
 import { queryKeysFactory } from "../../lib/query-key-factory";
-import { QueryKey, useQuery, UseQueryOptions } from "@tanstack/react-query";
+import {
+  QueryKey,
+  useMutation,
+  UseMutationOptions,
+  useQuery,
+  useQueryClient,
+  UseQueryOptions,
+} from "@tanstack/react-query";
 import { FetchError } from "@medusajs/js-sdk";
 import { sdk } from "../../lib/sdk";
 
@@ -31,4 +40,27 @@ export const useCashbacks = (
     ...options,
   });
   return { ...data, ...rest };
+};
+
+export const useCreateCashback = (
+  options?: UseMutationOptions<
+    AdminCashbackResponse,
+    FetchError,
+    AdminCreateCashback
+  >,
+) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (payload) =>
+      sdk.client.fetch("/admin/cashbacks", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: payload,
+      }),
+    onSuccess: (data, variables, context) => {
+      queryClient.invalidateQueries({ queryKey: cashbackQueryKeys.lists() });
+      options?.onSuccess?.(data, variables, context);
+    },
+    ...options,
+  });
 };
