@@ -2,12 +2,17 @@ import { useTranslation } from "react-i18next";
 
 import { Thumbnail } from "../../../../common/thumbnail";
 import { HttpTypes } from "@medusajs/types";
+import { PlaceholderCell } from "../../common/placeholder-cell";
 
 type ProductCellProps = {
-  product: Pick<HttpTypes.AdminProduct, "thumbnail" | "title">;
+  product:
+    | Pick<HttpTypes.AdminProduct, "thumbnail" | "title">
+    | null
+    | undefined;
 };
 
 export const ProductCell = ({ product }: ProductCellProps) => {
+  if (!product) return <PlaceholderCell />;
   return (
     <div className="flex h-full w-full max-w-[250px] items-center gap-x-3 overflow-hidden">
       <div className="w-fit flex-shrink-0">
