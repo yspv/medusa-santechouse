@@ -1,5 +1,5 @@
 import { useBrand } from "../../../hooks/api/brands";
-import { useParams } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import { JsonViewSection } from "../../../components/common/json-view-section";
 import { MetadataSection } from "../../../components/common/metadata-section";
 import { BrandGeneralSection } from "../components/brand-details/brand-general-section";
@@ -20,6 +20,7 @@ const BrandDetails = () => {
       <BrandProductSection brand={brand} />
       <JsonViewSection data={brand} />
       <MetadataSection data={brand} />
+      <Outlet />
     </div>
   );
 };
