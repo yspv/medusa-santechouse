@@ -32,4 +32,9 @@ export const priceConversionMiddlewares: MiddlewareRoute[] = [
       ),
     ],
   },
+  {
+    method: ["POST"],
+    matcher: "/admin/price-conversion/:transaction_id/confirm",
+    middlewares: [],
+  },
 ];
