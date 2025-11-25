@@ -69,3 +69,21 @@ export const useCreatePriceConversion = (
     ...options,
   });
 };
+
+export const useConfirmPriceConversion = (
+  transactionId: string,
+  options?: UseMutationOptions<unknown, FetchError, unknown>,
+) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: () =>
+      sdk.client.fetch(`/admin/price-conversions/${transactionId}/confirm`),
+    onSuccess: (data, variables, context) => {
+      queryClient.invalidateQueries({
+        queryKey: priceConversionQueryKeys.lists(),
+      });
+      options?.onSuccess?.(data, variables, context);
+    },
+    ...options,
+  });
+};
