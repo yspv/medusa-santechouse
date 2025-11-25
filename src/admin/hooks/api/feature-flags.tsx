@@ -1,0 +1,24 @@
+import { sdk } from "@/lib/sdk";
+import { useQuery } from "@tanstack/react-query";
+
+export type FeatureFlags = {
+  view_configurations?: boolean;
+  [key: string]: boolean | undefined;
+};
+
+export const useFeatureFlags = () => {
+  return useQuery<FeatureFlags>({
+    queryKey: ["admin", "feature-flags"],
+    queryFn: async () => {
+      const response = await sdk.client.fetch<{ feature_flags: FeatureFlags }>(
+        "/admin/feature-flags",
+        {
+          method: "GET",
+        },
+      );
+
+      return response.feature_flags;
+    },
+    staleTime: 5 * 60 * 1000,
+  });
+};
