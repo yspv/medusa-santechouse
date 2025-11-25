@@ -1,6 +1,7 @@
 import React from "react";
 import { useBrandTableColumns } from "./use-brand-table-columns";
 import {
+  Button,
   createDataTableColumnHelper,
   DataTable,
   DataTablePaginationState,
@@ -12,7 +13,7 @@ import {
 import { useBrandTableQuery } from "./use-brand-table-query";
 import { useBrands, useDeleteBrand } from "../../../../hooks/api/brands";
 import { keepPreviousData } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { AdminBrand } from "../../../../../types/http";
 import { ActionMenu } from "../../../../components/common/action-menu";
@@ -54,7 +55,14 @@ export const BrandListTable = () => {
   return (
     <DataTable instance={table}>
       <DataTable.Toolbar>
-        <Heading>{t("brands.domain")}</Heading>
+        <div className="flex justify-between w-full items-center">
+          <Heading>{t("brands.domain")}</Heading>
+          <Link to="create">
+            <Button size="small" variant="secondary">
+              {t("actions.create")}
+            </Button>
+          </Link>
+        </div>
       </DataTable.Toolbar>
       <DataTable.Table />
       <DataTable.Pagination />
