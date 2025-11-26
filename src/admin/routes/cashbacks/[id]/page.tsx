@@ -6,11 +6,12 @@ import {
   CashbackGeneralSection,
   CashbackAmountsSection,
 } from "../components/cashback-details";
+import { CASHBACK_DETAILS_FIELDS } from "../constants";
 
 const CashbackDetailsPage = () => {
   const { id } = useParams();
   const { cashback, isLoading, isError, error } = useCashback(id as string, {
-    fields: "+product_variant.*",
+    fields: CASHBACK_DETAILS_FIELDS,
   });
   if (isError) {
     throw error;

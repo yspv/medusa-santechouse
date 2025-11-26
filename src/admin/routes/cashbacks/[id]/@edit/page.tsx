@@ -4,11 +4,14 @@ import { useParams } from "react-router-dom";
 import { RouteDrawer } from "@/components/modals/route-drawer/route-drawer";
 import { useCashback } from "@/hooks/api";
 import { CashbackEditForm } from "../../components/cashback-edit-form";
+import { CASHBACK_DETAILS_FIELDS } from "../../constants";
 
 const CashbackEditPage = () => {
   const { id } = useParams();
   const { t } = useTranslation();
-  const { cashback, isLoading, isError, error } = useCashback(id as string);
+  const { cashback, isLoading, isError, error } = useCashback(id!, {
+    fields: CASHBACK_DETAILS_FIELDS,
+  });
   if (isError) {
     throw error;
   }
