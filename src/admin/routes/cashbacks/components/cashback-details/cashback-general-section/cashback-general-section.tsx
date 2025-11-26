@@ -5,6 +5,7 @@ import { getIsActiveProps } from "@/lib/get-status-props";
 import { SectionRow } from "@/components/common/section";
 import { useDate } from "@/hooks/use-date";
 import { ActionMenu } from "@/components/common/action-menu";
+import { PencilSquare } from "@medusajs/icons";
 
 export const CashbackGeneralSection = (props: { cashback: AdminCashback }) => {
   const { cashback } = props;
@@ -24,7 +25,19 @@ export const CashbackGeneralSection = (props: { cashback: AdminCashback }) => {
               {activeProps.label}
             </StatusBadge>
           </div>
-          <ActionMenu groups={[]} />
+          <ActionMenu
+            groups={[
+              {
+                actions: [
+                  {
+                    label: t("actions.edit"),
+                    icon: <PencilSquare />,
+                    to: "edit",
+                  },
+                ],
+              },
+            ]}
+          />
         </div>
       </div>
       <SectionRow title={t("fields.sku")} value={variant?.sku} />
