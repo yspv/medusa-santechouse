@@ -49,7 +49,20 @@
     }
   },
   "cashbacks": {
-    "domain": "Кэшбек"
+    "domain": "Кэшбэк",
+    "edit": {
+      "header": "Редактировать кэшбэк",
+      "successToast": "Кэшбэк успешно обновлен."
+    },
+    "fields": {
+      "amounts": {
+        "label": "Сумма"
+      },
+      "status": {
+        "label": "Статус",
+        "hint": "Если флажок снят, кэшбэк не будет активен"
+      }
+    }
   },
   "cashback-accounts": {
     "domain": "Кэшбек аккаунты",
