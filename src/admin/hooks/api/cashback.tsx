@@ -19,6 +19,31 @@ import { sdk } from "../../lib/sdk";
 const CASHBACKS_QUERY_KEY = "cashbacks";
 export const cashbackQueryKeys = queryKeysFactory(CASHBACKS_QUERY_KEY);
 
+export const useCashback = (
+  id: string,
+  query?: AdminCashbackParams,
+  options?: Omit<
+    UseMutationOptions<
+      AdminCashbackResponse,
+      FetchError,
+      AdminCashbackResponse,
+      QueryKey
+    >,
+    "queryKey" | "queryFn"
+  >,
+) => {
+  const { data, ...rest } = useQuery({
+    queryKey: cashbackQueryKeys.detail(id, query),
+    queryFn: () =>
+      sdk.client.fetch<AdminCashbackResponse>(`/admin/cashbacks/${id}`, {
+        query,
+      }),
+    ...options,
+  });
+
+  return { ...data, ...rest };
+};
+
 export const useCashbacks = (
   query?: AdminCashbackParams,
   options?: Omit<
