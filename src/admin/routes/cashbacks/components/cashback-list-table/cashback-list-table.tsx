@@ -1,20 +1,21 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import {
+  Button,
   createDataTableColumnHelper,
   DataTable,
   DataTablePaginationState,
   Heading,
   useDataTable,
 } from "@medusajs/ui";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCashbackTableQuery } from "./use-cashback-table-query";
 import { useCashbacks } from "../../../../hooks/api/cashback";
 import { keepPreviousData } from "@tanstack/react-query";
 import { AdminCashback } from "../../../../../types/http";
 import { useCashbackTableColumns } from "./use-cashback-table-columns";
 import { ActionMenu } from "../../../../components/common/action-menu";
-import { Trash } from "@medusajs/icons";
+import { PencilSquare, Trash } from "@medusajs/icons";
 
 const PAGE_SIZE = 20;
 
@@ -41,7 +42,7 @@ export const CashbackListTable = () => {
     data: cashbacks || [],
     getRowId: (row) => row.id,
     rowCount: count || 0,
-    onRowClick: (_, row) => navigate(`/brands/${row.id}`),
+    onRowClick: (_, row) => navigate(`${row.id}`),
     isLoading,
     pagination: {
       state: pagination,
@@ -67,6 +68,11 @@ const CashbackActions = ({ cashback }: { cashback: AdminCashback }) => {
       groups={[
         {
           actions: [
+            {
+              label: t("actions.edit"),
+              icon: <PencilSquare />,
+              to: `${cashback.id}/edit`,
+            },
             {
               label: t("actions.delete"),
               icon: <Trash />,
