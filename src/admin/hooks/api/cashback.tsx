@@ -3,6 +3,7 @@ import {
   AdminCashbackParams,
   AdminCashbackResponse,
   AdminCreateCashback,
+  AdminUpdateCashback,
 } from "../../../types/http";
 import { queryKeysFactory } from "../../lib/query-key-factory";
 import {
@@ -83,6 +84,31 @@ export const useCreateCashback = (
         body: payload,
       }),
     onSuccess: (data, variables, context) => {
+      queryClient.invalidateQueries({ queryKey: cashbackQueryKeys.lists() });
+      options?.onSuccess?.(data, variables, context);
+    },
+    ...options,
+  });
+};
+
+export const useUpdateCashback = (
+  id: string,
+  options?: UseMutationOptions<
+    AdminCashbackResponse,
+    FetchError,
+    AdminUpdateCashback
+  >,
+) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (payload) =>
+      sdk.client.fetch<AdminCashbackResponse>(`/admin/cashbacks/${id}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: payload,
+      }),
+    onSuccess: (data, variables, context) => {
+      queryClient.invalidateQueries({ queryKey: cashbackQueryKeys.detail(id) });
       queryClient.invalidateQueries({ queryKey: cashbackQueryKeys.lists() });
       options?.onSuccess?.(data, variables, context);
     },
