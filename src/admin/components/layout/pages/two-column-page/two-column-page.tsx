@@ -4,7 +4,6 @@ import { Outlet } from "react-router-dom";
 import { JsonViewSection } from "../../../common/json-view-section";
 import { MetadataSection } from "../../../common/metadata-section";
 import { PageProps } from "../types";
-import { TwoColumnPageSkeleton } from "@/components/common/skeleton";
 
 interface TwoColumnPageProps<TData> extends PageProps<TData> {
   mainSections?: number;
@@ -15,9 +14,6 @@ interface TwoColumnPageProps<TData> extends PageProps<TData> {
 const Root = <TData,>({
   children,
   data,
-  mainSections,
-  sidebarSections,
-  isLoading,
   showJSON = false,
   showMetadata = false,
   hasOutlet = true,
