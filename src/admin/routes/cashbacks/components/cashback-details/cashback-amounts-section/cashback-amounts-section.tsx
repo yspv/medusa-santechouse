@@ -24,7 +24,7 @@ export const CashbackAmountsSection = (props: {
                   {
                     label: t("actions.edit"),
                     icon: <PencilSquare />,
-                    to: "edit",
+                    to: "amounts",
                   },
                 ],
               },
