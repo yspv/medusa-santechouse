@@ -17,7 +17,7 @@ import {
 import { FetchError } from "@medusajs/js-sdk";
 import { sdk } from "../../lib/sdk";
 
-const CASHBACKS_QUERY_KEY = "cashbacks";
+const CASHBACKS_QUERY_KEY = "cashbacks" as const;
 export const cashbackQueryKeys = queryKeysFactory(CASHBACKS_QUERY_KEY);
 
 export const useCashback = (
@@ -34,7 +34,7 @@ export const useCashback = (
   >,
 ) => {
   const { data, ...rest } = useQuery({
-    queryKey: cashbackQueryKeys.detail(id, query),
+    queryKey: cashbackQueryKeys.detail(id),
     queryFn: () =>
       sdk.client.fetch<AdminCashbackResponse>(`/admin/cashbacks/${id}`, {
         query,
