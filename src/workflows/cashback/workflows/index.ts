@@ -10,3 +10,4 @@ export * from "./delete-cashback-accounts";
 export * from "./credit-cashback";
 export * from "./apply-cashback";
 export * from "./adjustment-cashback-account-balance";
+export * from "./batch-cashback-amounts";
