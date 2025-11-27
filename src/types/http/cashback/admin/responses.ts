@@ -1,4 +1,8 @@
-import { DeleteResponse, PaginatedResponse } from "@medusajs/framework/types";
+import {
+  BatchResponse,
+  DeleteResponse,
+  PaginatedResponse,
+} from "@medusajs/framework/types";
 import {
   AdminCashback,
   AdminCashbackAccount,
@@ -46,3 +50,6 @@ export interface AdminCashbackTransactionListResponse
   extends PaginatedResponse<{
     cashback_transactions: AdminCashbackTransaction[];
   }> {}
+
+export interface AdminBatchCashbackAmountResponse
+  extends BatchResponse<AdminCashbackAmount> {}

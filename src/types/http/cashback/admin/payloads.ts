@@ -1,4 +1,4 @@
-import { MetadataType } from "@medusajs/framework/types";
+import { BatchMethodRequest, MetadataType } from "@medusajs/framework/types";
 
 export interface AdminCreateCashback {
   variant_id: string;
@@ -45,3 +45,14 @@ export interface AdminRedeemCashback {
 export interface AdminAdjustmentCashbackAccountBalance {
   amount: number;
 }
+
+export interface AdminBatchUpdateCashbackAmount
+  extends AdminUpdateCashbackAmount {
+  id: string;
+}
+
+export interface AdminBatchCashbackAmountRequest
+  extends BatchMethodRequest<
+    AdminCreateCashbackAmount,
+    AdminBatchUpdateCashbackAmount
+  > {}
