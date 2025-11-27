@@ -4,11 +4,11 @@ import { PlaceholderCell } from "../../common/placeholder-cell";
 import { Tooltip } from "@medusajs/ui";
 import { localizePrice } from "../../../../../lib/localize-price";
 
-type CashbackAmountsCellProps = {
+type AmountsCellProps = {
   amounts?: AdminCashbackAmount[] | null;
 };
 
-export const CashbackAmountsCell = ({ amounts }: CashbackAmountsCellProps) => {
+export const AmountsCell = ({ amounts }: AmountsCellProps) => {
   const { t, i18n } = useTranslation();
 
   if (!amounts || !amounts.length) {
@@ -53,6 +53,15 @@ export const CashbackAmountsCell = ({ amounts }: CashbackAmountsCellProps) => {
           currency_code: amount.currency_code,
         })}
       </span>
+    </div>
+  );
+};
+
+export const AmountsHeader = () => {
+  const { t } = useTranslation();
+  return (
+    <div className="flex h-full w-full items-center justify-end">
+      <span className="truncate">{t("cashbacks.fields.amounts.label")}</span>
     </div>
   );
 };
