@@ -1,6 +1,6 @@
 import { useQueryParams } from "@/hooks/use-query-params";
 
-const DEFAULT_FIELDS = "+product.*";
+const DEFAULT_FIELDS = "+product.*,+cashback.*";
 
 export const useProductVariantTableQuery = ({
   prefix,
