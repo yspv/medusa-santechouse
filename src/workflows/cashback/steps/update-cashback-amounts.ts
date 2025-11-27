@@ -23,7 +23,6 @@ export const updateCashbackAmountsStep = createStep(
   updateCashbackAmountsStepId,
   async (data: UpdateCashbackAmountsStepInput, { container }) => {
     const service = container.resolve(CASHBACK_MODULE);
-    const logger = container.resolve("logger");
     if ("cashback_amounts" in data) {
       if (data.cashback_amounts.some((c) => !c.id)) {
         throw new MedusaError(
@@ -38,6 +37,9 @@ export const updateCashbackAmountsStep = createStep(
         data.cashback_amounts,
       );
       return new StepResponse(updated, prevData);
+    }
+    if (!data.selector || !data.data) {
+      return new StepResponse([]);
     }
     const { selects, relations } = getSelectsAndRelationsFromObjectArray([
       data.data,
