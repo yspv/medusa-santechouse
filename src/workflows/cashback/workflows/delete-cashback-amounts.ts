@@ -15,6 +15,9 @@ export const deleteCashbackAmuontsWorkflowId = "delete-cashback-amounts";
 export const deleteCashbackAmountsWorkflow = createWorkflow(
   deleteCashbackAmuontsWorkflowId,
   (input: WorkflowData<DeleteCashbackAmountsWorkflowInput>) => {
+    if (!input.ids.length) {
+      return new WorkflowResponse(void 0);
+    }
     const deleted = deleteCashbackAmountsStep(input.ids);
     return new WorkflowResponse(deleted);
   },
