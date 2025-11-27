@@ -31,7 +31,7 @@ export const batchCashbackAmountsWorkflowId = "batch-cashback-amounts";
 export const batchCashbackAmountsWorkflow = createWorkflow(
   batchCashbackAmountsWorkflowId,
   (input: WorkflowData<BatchCashbackAmountsWorkflowInput>) => {
-    const normalizedInput = transform({ input }, (data) => {
+    const normalizedInput = transform({ input }, ({ input }) => {
       return {
         create: input.create || [],
         update: input.update || [],
@@ -53,8 +53,8 @@ export const batchCashbackAmountsWorkflow = createWorkflow(
 
     const response = transform({ res, input }, (data) => {
       return {
-        created: data[0],
-        updated: data[0],
+        created: data.res[0],
+        updated: data.res[1],
         deleted: data.input.delete ?? [],
       };
     });
