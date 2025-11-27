@@ -1,4 +1,6 @@
 import {
+  AdminBatchCashbackAmountRequest,
+  AdminBatchCashbackAmountResponse,
   AdminCashbackListResponse,
   AdminCashbackParams,
   AdminCashbackResponse,
@@ -103,6 +105,31 @@ export const useUpdateCashback = (
   return useMutation({
     mutationFn: (payload) =>
       sdk.client.fetch<AdminCashbackResponse>(`/admin/cashbacks/${id}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: payload,
+      }),
+    onSuccess: (data, variables, context) => {
+      queryClient.invalidateQueries({ queryKey: cashbackQueryKeys.detail(id) });
+      queryClient.invalidateQueries({ queryKey: cashbackQueryKeys.lists() });
+      options?.onSuccess?.(data, variables, context);
+    },
+    ...options,
+  });
+};
+
+export const useBatchCashbackAmounts = (
+  id: string,
+  options?: UseMutationOptions<
+    AdminBatchCashbackAmountResponse,
+    FetchError,
+    AdminBatchCashbackAmountRequest
+  >,
+) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (payload) =>
+      sdk.client.fetch(`/admin/cashbacks/${id}/amounts/batch`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: payload,
