@@ -4,6 +4,7 @@ import {
   validateAndTransformQuery,
 } from "@medusajs/framework";
 import {
+  AdminBatchupdateCashbackAmount,
   AdminCashbackAmountParams,
   AdminCashbackAmountsParams,
   AdminCashbackParams,
@@ -17,6 +18,7 @@ import {
 import * as QueryConfig from "./query-config";
 import { retrieveCashbackTransactionConfig } from "../cashback-accounts/query-config";
 import { AdminCashbackTransactionParams } from "../cashback-accounts/validators";
+import { createBatchBody } from "@medusajs/medusa/api/utils/validators";
 
 export const cashbackMiddlewares: MiddlewareRoute[] = [
   {
@@ -121,6 +123,22 @@ export const cashbackMiddlewares: MiddlewareRoute[] = [
       validateAndTransformQuery(
         AdminCashbackTransactionParams,
         retrieveCashbackTransactionConfig,
+      ),
+    ],
+  },
+  {
+    method: ["POST"],
+    matcher: "/admin/cashbacks/:id/amounts/batch",
+    middlewares: [
+      validateAndTransformBody(
+        createBatchBody(
+          AdminCreateCashbackAmount,
+          AdminBatchupdateCashbackAmount,
+        ),
+      ),
+      validateAndTransformQuery(
+        AdminCashbackAmountParams,
+        QueryConfig.retrieveCashbackAmountConfig,
       ),
     ],
   },

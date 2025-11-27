@@ -22,3 +22,7 @@ export const AdminUpdateCashbackAmount = z.object({
   amount: z.number().positive().optional(),
   metadata: z.record(z.unknown()).nullish(),
 });
+
+export const AdminBatchupdateCashbackAmount = AdminUpdateCashbackAmount.extend({
+  id: z.string(),
+});

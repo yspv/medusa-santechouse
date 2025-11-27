@@ -3,7 +3,10 @@ import {
   createSelectParams,
 } from "@medusajs/medusa/api/utils/validators";
 import z from "zod";
-import { AdminCreateCashbackAmount } from "./cashback-amounts";
+import {
+  AdminCreateCashbackAmount,
+  AdminUpdateCashbackAmount,
+} from "./cashback-amounts";
 
 export const AdminCashbackParams = createSelectParams();
 export const AdminCashbacksParams = createFindParams({ offset: 0, limit: 50 });
