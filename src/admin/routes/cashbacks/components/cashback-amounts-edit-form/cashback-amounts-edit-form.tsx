@@ -1,4 +1,4 @@
-import { Button } from "@medusajs/ui";
+import { Button, toast } from "@medusajs/ui";
 import { useForm } from "react-hook-form";
 import { RouteFocusModal } from "@/components/modals/route-focus-modal";
 import { AdminCashback } from "@/types";
@@ -7,28 +7,44 @@ import { useTranslation } from "react-i18next";
 import { CashbackAmountsEditSchema } from "./schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CashbackAmountsForm } from "../cashback-amounts-form";
+import { useBatchCashbackAmounts } from "@/hooks/api";
+import { useRouteModal } from "@/components/modals/route-modal-provider";
+import { calculateAmountChanges, mapAmountsToRecord } from "../../helpers";
 
 type CashbackAmountsEditFormProps = {
   cashback: AdminCashback;
 };
+
 export const CashbackAmountsEditForm = ({
   cashback,
 }: CashbackAmountsEditFormProps) => {
   const { t } = useTranslation();
+  const { handleSuccess } = useRouteModal();
   const form = useForm<CashbackAmountsEditSchema>({
     defaultValues: {
       cashbacks: [cashback].map((c) => ({
         title: c.product_variant?.sku || "-",
-        amounts: c.amounts?.reduce((acc, amount) => {
-          acc[amount.currency_code] = amount.amount;
-          return acc;
-        }, {}),
+        amounts: mapAmountsToRecord(c.amounts || []),
       })),
     },
     resolver: zodResolver(CashbackAmountsEditSchema),
   });
+  const { mutateAsync: batchCashbackAmounts } = useBatchCashbackAmounts(
+    cashback.id,
+  );
   const isPending = false;
-  const handleSubmit = form.handleSubmit(() => {});
+  const handleSubmit = form.handleSubmit(async (values) => {
+    const formAmounts = values.cashbacks[0].amounts || {};
+    const changes = calculateAmountChanges(cashback.amounts || [], formAmounts);
+    await batchCashbackAmounts(changes, {
+      onSuccess: () => {
+        handleSuccess();
+      },
+      onError: (error) => {
+        toast(error.message);
+      },
+    });
+  });
   return (
     <RouteFocusModal.Form form={form}>
       <KeyboundForm
