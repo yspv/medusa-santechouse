@@ -30,6 +30,7 @@ export const BrandListTable = () => {
       columns={columns}
       isLoading={isLoading}
       getRowId={(row) => row.id}
+      rowHref={(row) => row.id}
       pageSize={PAGE_SIZE}
       rowCount={count}
       enableSearch
