@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 import { useCashbackAccounts } from "@/hooks/api";
 import { keepPreviousData } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { useCashbackAccountTableQuery } from "./use-cashback-account-table-query";
+import { useCashbackAccountTableQuery } from "@/hooks/table/query";
 
 const PAGE_SIZE = 20;
 
