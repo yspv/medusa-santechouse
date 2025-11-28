@@ -13,6 +13,7 @@ export const GET = async (
   req: MedusaRequest<AdminCashbackTransactionParams>,
   res: MedusaResponse<AdminCashbackTransactionListResponse>,
 ) => {
+  console.log(req.filterableFields);
   const { data, metadata } = await refetchEntities({
     entity: "cashback_transaction",
     idOrFilter: req.filterableFields,
