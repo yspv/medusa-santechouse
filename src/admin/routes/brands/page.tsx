@@ -20,6 +20,7 @@ const BrandPage = () => {
 export const config = defineRouteConfig({
   label: "Бренды",
   icon: TagSolid,
+  nested: "/products",
 });
 
 export const handle = {
