@@ -287,7 +287,7 @@ export const DataTable = <TData,>({
           )}
           <div className="flex items-center justify-end gap-x-2 md:hidden">
             {enableFiltering && <Primitive.FilterMenu tooltip="Filter" />}
-            <Primitive.SortingMenu tooltip="Sort" />
+            {enableSorting && <Primitive.SortingMenu tooltip="Sort" />}
             {actionMenu && <ActionMenu variant="primary" {...actionMenu} />}
             {action && <DataTableAction {...action} />}
           </div>
@@ -304,7 +304,7 @@ export const DataTable = <TData,>({
           )}
           <div className="hidden items-center gap-x-2 md:flex">
             {enableFiltering && <Primitive.FilterMenu />}
-            <Primitive.SortingMenu />
+            {enableSorting && <Primitive.SortingMenu />}
             {actionMenu && <ActionMenu variant="primary" {...actionMenu} />}
             {action && <DataTableAction {...action} />}
           </div>
