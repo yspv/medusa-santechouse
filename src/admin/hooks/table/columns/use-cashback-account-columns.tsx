@@ -73,6 +73,7 @@ export const useCashbackAccountColumns = () => {
       columnHelper.accessor("is_active", {
         header: () => <StatusHeader />,
         cell: ({ row }) => <StatusCell isActive={row.original.is_active} />,
+        enableSorting: true,
       }),
     ],
     [t],
