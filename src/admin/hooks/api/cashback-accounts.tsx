@@ -2,6 +2,7 @@ import { queryKeysFactory } from "@/lib/query-key-factory";
 import {
   AdminCashbackAccountListResponse,
   AdminCashbackAccountParams,
+  AdminCashbackAccountResponse,
 } from "@/types";
 import { QueryKey, useQuery, UseQueryOptions } from "@tanstack/react-query";
 import { FetchError } from "@medusajs/js-sdk";
@@ -33,5 +34,31 @@ export const useCashbackAccounts = (
       ),
     ...options,
   });
+  return { ...data, ...rest };
+};
+
+export const useCashbackAccount = (
+  id: string,
+  query?: AdminCashbackAccountParams,
+  options?: Omit<
+    UseQueryOptions<
+      AdminCashbackAccountResponse,
+      FetchError,
+      AdminCashbackAccountResponse,
+      QueryKey
+    >,
+    "queryFn" | "queryKey"
+  >,
+) => {
+  const { data, ...rest } = useQuery({
+    queryKey: cashbackAccountQueryKeys.detail(id),
+    queryFn: () =>
+      sdk.client.fetch<AdminCashbackAccountResponse>(
+        `/admin/cashback-accounts/${id}`,
+        { query },
+      ),
+    ...options,
+  });
+
   return { ...data, ...rest };
 };
