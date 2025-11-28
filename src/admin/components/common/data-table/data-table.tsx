@@ -311,7 +311,7 @@ export const DataTable = <TData,>({
         </div>
       </Primitive.Toolbar>
       <Primitive.Table emptyState={emptyState} />
-      {enablePagination && <Primitive.Pagination />}
+      {enablePagination && <DataTablePagination />}
       {enableCommands && (
         <Primitive.CommandBar selectedLabel={(count) => `${count} selected`} />
       )}
@@ -392,4 +392,17 @@ const DataTableAction = ({
       {label}
     </Button>
   );
+};
+
+const DataTablePagination = () => {
+  const { t } = useTranslation();
+  const translations = {
+    of: t("general.of"),
+    results: t("general.results"),
+    pages: t("general.pages"),
+    prev: t("general.prev"),
+    next: t("general.next"),
+  };
+
+  return <Primitive.Pagination translations={translations} />;
 };
