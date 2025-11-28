@@ -36,6 +36,7 @@ export interface FilterableCashbackTransactionProps
   id?: string | string[];
   type?: CashbackTransactionType | CashbackTransactionType[];
   currency_code?: string | string[];
+  account_id?: string | string[];
 }
 
 export interface CashbackDTO {
