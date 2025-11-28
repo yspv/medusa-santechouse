@@ -17,6 +17,7 @@ import {
 } from "@medusajs/ui";
 import React, { ReactNode, useCallback, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import { useQueryParams } from "@/hooks/use-query-params";
 import { ActionMenu } from "../action-menu";
@@ -103,6 +104,7 @@ export const DataTable = <TData,>({
   isLoading = false,
   layout = "auto",
 }: DataTableProps<TData>) => {
+  const { t } = useTranslation();
   const enableFiltering = filters && filters.length > 0;
   const enableCommands = commands && commands.length > 0;
   const enableSorting = columns.some((column) => column.enableSorting);
@@ -295,14 +297,14 @@ export const DataTable = <TData,>({
             <div className="w-full md:w-auto">
               <Primitive.Search
                 data-modal-id="modal-search-input"
-                placeholder="Search"
+                placeholder={t("general.search")}
                 autoFocus={autoFocusSearch}
               />
             </div>
           )}
           <div className="hidden items-center gap-x-2 md:flex">
-            {enableFiltering && <Primitive.FilterMenu tooltip="Filter" />}
-            <Primitive.SortingMenu tooltip="Sort" />
+            {enableFiltering && <Primitive.FilterMenu />}
+            <Primitive.SortingMenu />
             {actionMenu && <ActionMenu variant="primary" {...actionMenu} />}
             {action && <DataTableAction {...action} />}
           </div>
