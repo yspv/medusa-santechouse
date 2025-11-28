@@ -1,5 +1,5 @@
 import { AdminCashbackTransaction } from "@/types";
-import { createDataTableColumnHelper } from "@medusajs/ui";
+import { createDataTableColumnHelper, DataTableColumnDef } from "@medusajs/ui";
 import React from "react";
 import {
   AccountCell,
@@ -18,8 +18,11 @@ import {
 
 const columnHelper = createDataTableColumnHelper<AdminCashbackTransaction>();
 
-export const useCashbackTransactionTableColumns = () => {
-  return React.useMemo(
+export const useCashbackTransactionTableColumns = (props: {
+  exclude?: string[];
+}) => {
+  const { exclude = [] } = props ?? {};
+  const columns = React.useMemo(
     () => [
       columnHelper.accessor("account", {
         header: () => <AccountHeader />,
@@ -51,4 +54,34 @@ export const useCashbackTransactionTableColumns = () => {
     ],
     [],
   );
+
+  const isAccessorColumnDef = (
+    c: any,
+  ): c is DataTableColumnDef<AdminCashbackTransaction> & {
+    accessorKey: string;
+  } => {
+    return c.accessorKey !== undefined;
+  };
+
+  const isDisplayColumnDef = (
+    c: any,
+  ): c is DataTableColumnDef<AdminCashbackTransaction> & { id: string } => {
+    return c.id !== undefined;
+  };
+
+  const shouldExclude = <
+    TDef extends DataTableColumnDef<AdminCashbackTransaction, any>,
+  >(
+    c: TDef,
+  ) => {
+    if (isAccessorColumnDef(c)) {
+      return exclude.includes(c.accessorKey);
+    } else if (isDisplayColumnDef(c)) {
+      return exclude.includes(c.id);
+    }
+
+    return false;
+  };
+
+  return columns.filter((c) => !shouldExclude(c));
 };

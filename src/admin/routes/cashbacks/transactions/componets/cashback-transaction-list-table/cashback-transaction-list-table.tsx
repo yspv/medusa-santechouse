@@ -59,6 +59,6 @@ export const CashbackTransactionListTable = () => {
 };
 
 const useColumns = () => {
-  const base = useCashbackTransactionTableColumns();
+  const base = useCashbackTransactionTableColumns({ exclude: [] });
   return React.useMemo(() => [...base], [base]);
 };
