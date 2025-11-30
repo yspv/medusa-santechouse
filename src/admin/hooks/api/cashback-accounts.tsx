@@ -4,6 +4,7 @@ import {
   AdminCashbackAccountListResponse,
   AdminCashbackAccountParams,
   AdminCashbackAccountResponse,
+  AdminCreateCashbackAccount,
   AdminUpdateCashbackAccount,
 } from "@/types";
 import {
@@ -134,6 +135,33 @@ export const useAdjustmentCashbackAccount = (
       });
       queryClient.invalidateQueries({
         queryKey: cashbackTrasactionQueryKeys.lists(),
+      });
+      options?.onSuccess?.(data, variables, context);
+    },
+    ...options,
+  });
+};
+
+export const useCreateCashbackAccount = (
+  options?: UseMutationOptions<
+    AdminCashbackAccountResponse,
+    FetchError,
+    AdminCreateCashbackAccount
+  >,
+) => {
+  const querClient = useQueryClient();
+  return useMutation({
+    mutationFn: (payload) =>
+      sdk.client.fetch(`/admin/cashback-accounts`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: payload,
+      }),
+    onSuccess: (data, variables, context) => {
+      querClient.invalidateQueries({
+        queryKey: cashbackAccountQueryKeys.lists(),
       });
       options?.onSuccess?.(data, variables, context);
     },
