@@ -66,10 +66,18 @@
   },
   "cashback-accounts": {
     "domain": "Кэшбек аккаунты",
+    "edit": {
+      "header": "Редактировать аккаунт",
+      "successToast": "Аккаунт успешно обновлен."
+    },
     "fields": {
       "balance": "Баланс",
       "total_earned": "Заработанная сумма",
-      "total_redeemed": "Потраченная сумма"
+      "total_redeemed": "Потраченная сумма",
+      "status": {
+        "label": "Статус",
+        "hint": "Если флажок снят, аккаунт не будет активен"
+      }
     }
   },
   "cashback-transactions": {
