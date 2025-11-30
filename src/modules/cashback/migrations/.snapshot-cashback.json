@@ -15,6 +15,15 @@
           "nullable": false,
           "mappedType": "text"
         },
+        "variant_id": {
+          "name": "variant_id",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "text"
+        },
         "is_active": {
           "name": "is_active",
           "type": "boolean",
@@ -70,6 +79,15 @@
       "name": "cashback",
       "schema": "public",
       "indexes": [
+        {
+          "keyName": "IDX_cashback_variant_id_unique",
+          "columnNames": [],
+          "composite": false,
+          "constraint": false,
+          "primary": false,
+          "unique": false,
+          "expression": "CREATE UNIQUE INDEX IF NOT EXISTS \"IDX_cashback_variant_id_unique\" ON \"cashback\" (\"variant_id\") WHERE deleted_at IS NULL"
+        },
         {
           "keyName": "IDX_cashback_deleted_at",
           "columnNames": [],
@@ -402,6 +420,15 @@
           "expression": "CREATE INDEX IF NOT EXISTS \"IDX_cashback_amount_deleted_at\" ON \"cashback_amount\" (\"deleted_at\") WHERE deleted_at IS NULL"
         },
         {
+          "keyName": "IDX_cashback_account_cashback_id_currency_code_unique",
+          "columnNames": [],
+          "composite": false,
+          "constraint": false,
+          "primary": false,
+          "unique": false,
+          "expression": "CREATE UNIQUE INDEX IF NOT EXISTS \"IDX_cashback_account_cashback_id_currency_code_unique\" ON \"cashback_amount\" (\"cashback_id\", \"currency_code\") WHERE deleted_at IS NULL"
+        },
+        {
           "keyName": "cashback_amount_pkey",
           "columnNames": [
             "id"
@@ -424,6 +451,7 @@
             "id"
           ],
           "referencedTableName": "public.cashback",
+          "deleteRule": "cascade",
           "updateRule": "cascade"
         }
       },
