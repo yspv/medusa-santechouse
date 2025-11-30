@@ -17,7 +17,7 @@ import {
 } from "@medusajs/framework/utils";
 
 export type CreateCashbackAccountsWorkflowInput = {
-  accounts: (CreateCashbackAccountDTO & { customer_id: string })[];
+  accounts: CreateCashbackAccountDTO[];
 };
 
 const validateCreateCashbackAccounts = createStep(

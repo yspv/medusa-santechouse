@@ -16,6 +16,7 @@ export interface CreateCashbackAmountDTO {
 }
 
 export interface CreateCashbackAccountDTO {
+  customer_id: string;
   currency_code: string;
   total_earned?: number;
   total_redeemed?: number;
