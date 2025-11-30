@@ -28,13 +28,13 @@ const validateCreateCashbackAccounts = createStep(
   ) => {
     const query = container.resolve(ContainerRegistrationKeys.QUERY);
     const { data: accounts } = await query.graph({
-      entity: "customer_cashback_account",
+      entity: "cashback_account",
       filters: { customer_id: data.map((c) => c.customer_id) },
-      fields: ["*", "cashback_account.*"],
+      fields: ["*"],
     });
     const existedAccounts = accounts.reduce((acc, account) => {
       const customerId = account.customer_id;
-      const currencyCode = account.cashback_account!.currency_code;
+      const currencyCode = account.currency_code;
       const currencyCodes = acc.get(customerId);
       if (currencyCodes) {
         currencyCodes.push(currencyCode);
