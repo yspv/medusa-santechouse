@@ -8,7 +8,7 @@ import {
 import { createCashbacksStep, createCashbackVariantLinkStep } from "../steps";
 
 export type CreateCashbackWorkflowInput = {
-  cashbacks: (CreateCashbackDTO & { variant_id: string })[];
+  cashbacks: CreateCashbackDTO[];
 };
 
 export const createCashbacksWorkflowId = "create-cashbacks";

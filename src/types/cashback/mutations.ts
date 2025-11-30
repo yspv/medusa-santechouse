@@ -2,6 +2,7 @@ import { MetadataType } from "@medusajs/framework/types";
 import { CashbackTransactionType } from "./common";
 
 export interface CreateCashbackDTO {
+  variant_id: string;
   amounts?: CreateCashbackAmountDTO[];
   is_active?: boolean;
   metadata?: MetadataType;
