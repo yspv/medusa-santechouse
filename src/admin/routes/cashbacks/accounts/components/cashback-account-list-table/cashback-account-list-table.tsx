@@ -36,6 +36,10 @@ export const CashbackAccountListTable = () => {
       pageSize={PAGE_SIZE}
       rowCount={count}
       enableSearch={false}
+      action={{
+        label: t("actions.create"),
+        to: "create",
+      }}
     />
   );
 };

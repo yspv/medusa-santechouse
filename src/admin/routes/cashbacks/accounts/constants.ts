@@ -19,3 +19,12 @@ export const CashbackAccountAdjustmentSchema = z.object({
 export type CashbackAccountAdjustmentSchema = z.infer<
   typeof CashbackAccountAdjustmentSchema
 >;
+
+export const CashbackAccountCreateSchema = z.object({
+  customer_id: z.string().nonempty(),
+  currency_code: z.string().nonempty(),
+});
+
+export type CashbackAccountCreateSchema = z.infer<
+  typeof CashbackAccountCreateSchema
+>;
