@@ -105,6 +105,15 @@
           "nullable": false,
           "mappedType": "text"
         },
+        "customer_id": {
+          "name": "customer_id",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "text"
+        },
         "version": {
           "name": "version",
           "type": "integer",
@@ -247,6 +256,15 @@
           "primary": false,
           "unique": false,
           "expression": "CREATE INDEX IF NOT EXISTS \"IDX_cashback_account_deleted_at\" ON \"cashback_account\" (\"deleted_at\") WHERE deleted_at IS NULL"
+        },
+        {
+          "keyName": "IDX_cashback_account_customer_currency_unique",
+          "columnNames": [],
+          "composite": false,
+          "constraint": false,
+          "primary": false,
+          "unique": false,
+          "expression": "CREATE UNIQUE INDEX IF NOT EXISTS \"IDX_cashback_account_customer_currency_unique\" ON \"cashback_account\" (\"customer_id\", \"currency_code\") WHERE deleted_at IS NULL"
         },
         {
           "keyName": "cashback_account_pkey",

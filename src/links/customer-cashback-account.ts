@@ -4,5 +4,6 @@ import CashbackModule from "@/modules/cashback";
 
 export default defineLink(CustomerModule.linkable.customer, {
   linkable: CashbackModule.linkable.cashbackAccount,
+  field: "customer_id",
   isList: true,
 });
