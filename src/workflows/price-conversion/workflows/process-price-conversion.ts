@@ -52,6 +52,7 @@ const prepareUpsertPriceSets = (data: {
   const priceSetMap = createPriceSetMap(priceSets);
   return priceSetMap.reduce<UpsertPriceSetDTO[]>((acc, [id, prices]) => {
     const source = prices[conversion.from];
+    if (!source?.amount) return acc;
     if (prices[conversion.to]) {
       prices[conversion.to].amount = source.amount * conversion.rate;
     } else {
