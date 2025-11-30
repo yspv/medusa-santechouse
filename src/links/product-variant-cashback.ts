@@ -4,5 +4,6 @@ import CashbackModule from "@/modules/cashback";
 
 export default defineLink(ProductModule.linkable.productVariant, {
   linkable: CashbackModule.linkable.cashback,
+  field: "variant_id",
   filterable: ["id"],
 });
