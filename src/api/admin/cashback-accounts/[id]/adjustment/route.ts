@@ -1,5 +1,5 @@
 import {
-  AdminAdjustmentCashbackAccountBalance,
+  AdminAdjustmentCashbackAccount,
   AdminCashbackAccountResponse,
 } from "@/types";
 import { adjustmentCashbackAccountBalanceWorkflow } from "@/workflows/cashback/workflows";
@@ -11,7 +11,7 @@ import {
 import { remapCashbackAccountResponse } from "../../helpers";
 
 export const POST = async (
-  req: MedusaRequest<AdminAdjustmentCashbackAccountBalance>,
+  req: MedusaRequest<AdminAdjustmentCashbackAccount>,
   res: MedusaResponse<AdminCashbackAccountResponse>,
 ) => {
   const accountId = req.params.id;

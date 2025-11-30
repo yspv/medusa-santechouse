@@ -42,7 +42,7 @@ export interface AdminRedeemCashback {
   amount: number;
 }
 
-export interface AdminAdjustmentCashbackAccountBalance {
+export interface AdminAdjustmentCashbackAccount {
   amount: number;
 }
 
