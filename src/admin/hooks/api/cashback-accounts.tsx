@@ -1,5 +1,6 @@
 import { queryKeysFactory } from "@/lib/query-key-factory";
 import {
+  AdminAdjustmentCashbackAccount,
   AdminCashbackAccountListResponse,
   AdminCashbackAccountParams,
   AdminCashbackAccountResponse,
@@ -15,6 +16,7 @@ import {
 } from "@tanstack/react-query";
 import { FetchError } from "@medusajs/js-sdk";
 import { sdk } from "@/lib/sdk";
+import { cashbackTrasactionQueryKeys } from "./cashback-transactions";
 
 const CASHBACK_ACCOUNTS_QUERY_KEY = "cashback_account";
 export const cashbackAccountQueryKeys = queryKeysFactory(
@@ -98,6 +100,40 @@ export const useUpdateCashbackAccount = (
       });
       queryClient.invalidateQueries({
         queryKey: cashbackAccountQueryKeys.lists(),
+      });
+      options?.onSuccess?.(data, variables, context);
+    },
+    ...options,
+  });
+};
+
+export const useAdjustmentCashbackAccount = (
+  id: string,
+  options?: UseMutationOptions<
+    AdminCashbackAccountResponse,
+    FetchError,
+    AdminAdjustmentCashbackAccount
+  >,
+) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (payload) =>
+      sdk.client.fetch(`/admin/cashback-accounts/${id}/adjustment`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: payload,
+      }),
+    onSuccess: (data, variables, context) => {
+      queryClient.invalidateQueries({
+        queryKey: cashbackAccountQueryKeys.detail(id),
+      });
+      queryClient.invalidateQueries({
+        queryKey: cashbackAccountQueryKeys.lists(),
+      });
+      queryClient.invalidateQueries({
+        queryKey: cashbackTrasactionQueryKeys.lists(),
       });
       options?.onSuccess?.(data, variables, context);
     },
