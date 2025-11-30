@@ -73,11 +73,11 @@ export const cashbackAccountMiddlewares: MiddlewareRoute[] = [
   },
   {
     method: ["POST"],
-    matcher: "/admin/cashback-accounts/adjustment",
+    matcher: "/admin/cashback-accounts/:id/adjustment",
     middlewares: [
       validateAndTransformBody(AdminAdjustmentCashbackAccountBalance),
       validateAndTransformQuery(
-        AdminAdjustmentCashbackAccountBalance,
+        AdminCashbackAccountParams,
         QueryConfig.retrieveCashbackAccountConfig,
       ),
     ],
