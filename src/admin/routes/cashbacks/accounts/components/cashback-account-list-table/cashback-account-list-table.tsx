@@ -32,6 +32,7 @@ export const CashbackAccountListTable = () => {
       data={cashback_accounts}
       isLoading={isLoading}
       getRowId={(row) => row.id}
+      rowHref={(row) => row.id}
       pageSize={PAGE_SIZE}
       rowCount={count}
       enableSearch={false}
