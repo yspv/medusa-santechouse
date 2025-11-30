@@ -1,4 +1,7 @@
 {
+  "actions": {
+    "adjustment": "Корректировка"
+  },
   "products": {
     "brand": {
       "edit": {
@@ -69,6 +72,11 @@
     "edit": {
       "header": "Редактировать аккаунт",
       "successToast": "Аккаунт успешно обновлен."
+    },
+    "adjustment": {
+      "header": "Корректировка баланса",
+      "result": "Итоговый баланс",
+      "successToast": "Баланс успешно корректирован."
     },
     "fields": {
       "balance": "Баланс",
