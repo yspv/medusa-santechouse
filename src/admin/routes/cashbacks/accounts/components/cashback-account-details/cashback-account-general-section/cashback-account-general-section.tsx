@@ -5,7 +5,7 @@ import { localizePrice } from "@/lib/localize-price";
 import { AdminCashbackAccount } from "@/types";
 import { Container, Heading, StatusBadge } from "@medusajs/ui";
 import { useTranslation } from "react-i18next";
-import { PencilSquare } from "@medusajs/icons";
+import { PencilSquare, PenPlus } from "@medusajs/icons";
 
 export const CashbackAccountGeneralSection = (props: {
   account: AdminCashbackAccount;
@@ -32,6 +32,11 @@ export const CashbackAccountGeneralSection = (props: {
                     label: t("actions.edit"),
                     icon: <PencilSquare />,
                     to: "edit",
+                  },
+                  {
+                    label: t("actions.adjustment"),
+                    icon: <PenPlus />,
+                    to: "adjustment",
                   },
                 ],
               },
