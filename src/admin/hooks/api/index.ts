@@ -11,3 +11,4 @@ export * from "./store";
 export * from "./views";
 export * from "./feature-flags";
 export * from "./product-variants";
+export * from "./customers";
