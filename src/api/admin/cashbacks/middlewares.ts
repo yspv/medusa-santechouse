@@ -16,8 +16,6 @@ import {
   AdminUpdateCashbackAmount,
 } from "./validators";
 import * as QueryConfig from "./query-config";
-import { retrieveCashbackTransactionConfig } from "../cashback-accounts/query-config";
-import { AdminCashbackTransactionParams } from "../cashback-accounts/validators";
 import { createBatchBody } from "@medusajs/medusa/api/utils/validators";
 
 export const cashbackMiddlewares: MiddlewareRoute[] = [
@@ -114,17 +112,6 @@ export const cashbackMiddlewares: MiddlewareRoute[] = [
     method: ["DELETE"],
     matcher: "/admin/cashbacks/:id/amounts/:amount_id",
     middlewares: [],
-  },
-  {
-    method: ["POST"],
-    matcher: "/admin/cashbacks/redeem",
-    middlewares: [
-      validateAndTransformBody(AdminRedeemCashback),
-      validateAndTransformQuery(
-        AdminCashbackTransactionParams,
-        retrieveCashbackTransactionConfig,
-      ),
-    ],
   },
   {
     method: ["POST"],
