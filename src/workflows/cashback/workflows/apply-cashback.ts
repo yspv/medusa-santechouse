@@ -36,6 +36,7 @@ export const applyCashbackWorkflow = createWorkflow(
     const { transaction } = redeemCashbackStep({
       account_id: account.id,
       amount: input.amount,
+      reference_id: input.order_id,
     });
     const creditLines = createOrderCreditLinesWorkflow.runAsStep({
       input: {
