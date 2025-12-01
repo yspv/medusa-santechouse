@@ -1,5 +1,6 @@
 export const defualtAdminCashbackAccountsFields = [
   "id",
+  "customer.*",
   "currency_code",
   "total_earned",
   "total_redeemed",
