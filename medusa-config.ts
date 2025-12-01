@@ -1,5 +1,6 @@
 import { loadEnv, defineConfig } from "@medusajs/framework/utils";
 import path from "path";
+import { Context, OrderTypes } from "@medusajs/framework/types";
 
 loadEnv(process.env.NODE_ENV || "development", process.cwd());
 
@@ -35,6 +36,50 @@ module.exports = defineConfig({
     },
     {
       resolve: "./src/modules/price-conversion",
+    },
+    {
+      resolve: "@medusajs/medusa/caching",
+      options: {
+        providers: [
+          {
+            resolve: "@medusajs/caching-redis",
+            id: "caching-redis",
+            is_default: true,
+            options: {
+              redisUrl: process.env.REDIS_URL,
+            },
+          },
+        ],
+      },
+    },
+    {
+      resolve: "@medusajs/medusa/event-bus-redis",
+      options: {
+        redisUrl: process.env.REDIS_URL,
+      },
+    },
+    {
+      resolve: "@medusajs/medusa/workflow-engine-redis",
+      options: {
+        redis: {
+          url: process.env.REDIS_URL,
+        },
+      },
+    },
+    {
+      resolve: "@medusajs/medusa/locking",
+      options: {
+        providers: [
+          {
+            resolve: "@medusajs/medusa/locking-redis",
+            id: "locking-redis",
+            is_default: true,
+            options: {
+              redisUrl: process.env.REDIS_URL,
+            },
+          },
+        ],
+      },
     },
   ],
 });

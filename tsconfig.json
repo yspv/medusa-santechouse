@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "target": "ES2021",
     "esModuleInterop": true,
     "module": "Node16",
@@ -20,7 +20,7 @@
     "checkJs": false,
     "strictNullChecks": true,
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./src/*"]
     }
   },
   "ts-node": {
