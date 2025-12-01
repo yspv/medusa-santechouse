@@ -1,3 +1,4 @@
+import { booleanString } from "@medusajs/medusa/api/utils/common-validators/common";
 import {
   createFindParams,
   createSelectParams,
@@ -8,7 +9,7 @@ export const AdminCashbackAccountsParamsFields = z.object({
   id: z.union([z.string(), z.array(z.string())]).optional(),
   customer_id: z.union([z.string(), z.array(z.string())]).optional(),
   currency_code: z.union([z.string(), z.array(z.string())]).optional(),
-  is_active: z.boolean().optional(),
+  is_active: booleanString().optional(),
 });
 
 export const AdminCashbackAccountParams = createSelectParams();
