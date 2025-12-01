@@ -186,8 +186,8 @@ const RedeemCashbackForm = (props: {
   );
 };
 
-export const config = defineWidgetConfig({
-  zone: "order.details.side.before",
-});
+// export const config = defineWidgetConfig({
+//   zone: "order.details.side.before",
+// });
 
 export default OrderCashbackAccountWidget;
