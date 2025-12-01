@@ -2,6 +2,10 @@
   "actions": {
     "adjustment": "Корректировка"
   },
+  "fields": {
+    "cashback_account": "Кэшбэк аккаунт",
+    "balance": "Баланс"
+  },
   "products": {
     "brand": {
       "edit": {
@@ -82,6 +86,10 @@
       "header": "Корректировка баланса",
       "result": "Итоговый баланс",
       "successToast": "Баланс успешно корректирован."
+    },
+    "redeem": {
+      "header": "Вывод кэшбэка",
+      "successToast": "Вывод кэшбэка успешно выполнен."
     },
     "fields": {
       "balance": "Баланс",
