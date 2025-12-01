@@ -24,7 +24,7 @@ module.exports = defineConfig({
     },
   },
   featureFlags: {
-    index_engine: true,
+    index_engine: false,
   },
   modules: [
     {
@@ -32,9 +32,6 @@ module.exports = defineConfig({
     },
     {
       resolve: "./src/modules/cashback",
-    },
-    {
-      resolve: "@medusajs/index",
     },
     {
       resolve: "./src/modules/price-conversion",
