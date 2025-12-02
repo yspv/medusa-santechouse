@@ -6,6 +6,7 @@ loadEnv(process.env.NODE_ENV || "development", process.cwd());
 
 module.exports = defineConfig({
   admin: {
+    disable: process.env.ADMIN_DISABLED === "true" || false,
     vite: () => ({
       resolve: {
         alias: {
@@ -16,6 +17,7 @@ module.exports = defineConfig({
   },
   projectConfig: {
     databaseUrl: process.env.DATABASE_URL,
+    workerMode: (process.env.WORKER_MODE as any) || "shared",
     http: {
       storeCors: process.env.STORE_CORS!,
       adminCors: process.env.ADMIN_CORS!,
