@@ -33,7 +33,9 @@ export const CashbackAccountCreateForm = ({ currencies }: Props) => {
       return customers
         .filter(
           (c: AdminCustomer & { cashback_accounts?: AdminCashbackAccount[] }) =>
-            c.cashback_accounts?.some((c) => c.currency_code !== currency_code),
+            !c.cashback_accounts?.some(
+              (acc) => acc.currency_code === currency_code,
+            ),
         )
         .map((c) => {
           const name = [c.first_name, c.last_name, `(${c.phone || c.email})`]
