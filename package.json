@@ -29,6 +29,13 @@
     "@medusajs/framework": "2.12.0",
     "@medusajs/index": "^2.12.0",
     "@medusajs/medusa": "2.12.0",
+    "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/core": "1.x",
+    "@opentelemetry/exporter-trace-otlp-grpc": "^0.208.0",
+    "@opentelemetry/sdk-trace-base": "1.x",
+    "@opentelemetry/semantic-conventions": "1.x",
+    "@sentry/node": "^10.27.0",
+    "@sentry/opentelemetry-node": "^7.114.0",
     "lodash": "^4.17.21",
     "slugify": "^1.6.6"
   },
