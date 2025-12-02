@@ -1,6 +1,5 @@
 import { loadEnv, defineConfig } from "@medusajs/framework/utils";
 import path from "path";
-import { Context, OrderTypes } from "@medusajs/framework/types";
 
 loadEnv(process.env.NODE_ENV || "development", process.cwd());
 
@@ -17,6 +16,7 @@ module.exports = defineConfig({
   },
   projectConfig: {
     databaseUrl: process.env.DATABASE_URL,
+    redisUrl: process.env.REDIS_URL,
     workerMode: (process.env.WORKER_MODE as any) || "shared",
     http: {
       storeCors: process.env.STORE_CORS!,
