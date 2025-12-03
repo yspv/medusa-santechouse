@@ -29,7 +29,7 @@ export default async function ({
     fields: [
       "id",
       "currency_code",
-      "customer.cashback_account.*",
+      "customer.cashback_accounts.*",
       "items.*",
       "items.variant.*",
       "items.variant.cashback.*",
