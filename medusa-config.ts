@@ -29,6 +29,12 @@ module.exports = defineConfig({
   featureFlags: {
     index_engine: false,
   },
+  plugins: [
+    {
+      resolve: "@agilo/medusa-analytics-plugin",
+      options: {},
+    },
+  ],
   modules: [
     {
       resolve: "./src/modules/brand",
