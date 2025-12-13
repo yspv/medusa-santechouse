@@ -61,7 +61,7 @@ export class PayloadModuleService {
     collection: string,
     data: PayloadUpsertData,
     options: PayloadQueryOptions = {},
-  ) {
+  ): Promise<PayloadItemResult<T>> {
     const stringifiedQuery = qs.stringify(
       {
         ...options,
@@ -85,7 +85,7 @@ export class PayloadModuleService {
     collection: string,
     data: PayloadUpsertData,
     options: PayloadQueryOptions = {},
-  ) {
+  ): Promise<PayloadItemResult<T>> {
     const stringifiedQuery = qs.stringify(
       {
         ...options,
