@@ -1,4 +1,5 @@
 import { MedusaError } from "@medusajs/framework/utils";
+import { FindConfig, Logger } from "@medusajs/framework/types";
 import {
   PayloadApiResponse,
   PayloadBulkResult,
@@ -12,7 +13,7 @@ import qs from "qs";
 
 type InjectedDependencies = {};
 
-export class PayloadModuleService {
+class PayloadModuleService {
   private baseUrl: string;
   private headers: Record<string, string>;
   private defaultOptions: Record<string, any> = {
@@ -169,4 +170,14 @@ export class PayloadModuleService {
       product_id: doc.medusa_id,
     }));
   }
+  async listAndCount(
+    filter: {
+      product_id: string | string[];
+    },
+    config?: FindConfig<any> | undefined,
+  ) {
+    console.log("__LIST_AND_COUNT__");
+  }
 }
+
+export default PayloadModuleService;

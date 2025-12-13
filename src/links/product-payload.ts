@@ -4,7 +4,7 @@ import ProductModule from "@medusajs/medusa/product";
 
 export default defineLink(
   {
-    linkable: ProductModule.linkable.product,
+    linkable: ProductModule.linkable.product.id,
     field: "id",
   },
   {
