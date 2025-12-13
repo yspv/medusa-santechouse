@@ -78,4 +78,28 @@ export class PayloadModuleService {
 
     return result;
   }
+
+  async update<T extends PayloadCollectionItem = PayloadCollectionItem>(
+    collection: string,
+    data: PayloadUpsertData,
+    options: PayloadQueryOptions = {},
+  ) {
+    const stringifiedQuery = qs.stringify(
+      {
+        ...options,
+        ...this.defaultOptions,
+      },
+      {
+        addQueryPrefix: true,
+      },
+    );
+    const endpoint = `/${collection}/${stringifiedQuery}`;
+
+    const result = await this.makeRequest<PayloadItemResult<T>>(endpoint, {
+      method: "PATCH",
+      body: JSON.stringify(data),
+    });
+
+    return result;
+  }
 }
