@@ -1,5 +1,7 @@
 import { MedusaError } from "@medusajs/framework/utils";
 import {
+  PayloadApiResponse,
+  PayloadBulkResult,
   PayloadCollectionItem,
   PayloadItemResult,
   PayloadModuleOptions,
@@ -101,5 +103,70 @@ export class PayloadModuleService {
     });
 
     return result;
+  }
+
+  async delete(
+    collection: string,
+    options: PayloadQueryOptions = {},
+  ): Promise<PayloadApiResponse> {
+    const stringifiedQuery = qs.stringify(
+      {
+        ...options,
+        ...this.defaultOptions,
+      },
+      {
+        addQueryPrefix: true,
+      },
+    );
+    const endpoint = `/${collection}/${stringifiedQuery}`;
+
+    const result = await this.makeRequest<PayloadApiResponse>(endpoint, {
+      method: "DELETE",
+    });
+
+    return result;
+  }
+
+  async find(
+    collection: string,
+    options: PayloadQueryOptions = {},
+  ): Promise<PayloadBulkResult<PayloadCollectionItem>> {
+    const stringifiedQuery = qs.stringify(
+      {
+        ...options,
+        ...this.defaultOptions,
+      },
+      {
+        addQueryPrefix: true,
+      },
+    );
+    const endpoint = `/${collection}${stringifiedQuery}`;
+
+    const result =
+      await this.makeRequest<PayloadBulkResult<PayloadCollectionItem>>(
+        endpoint,
+      );
+
+    return result;
+  }
+
+  async list(filter: { product_id: string | string[] }) {
+    const collection = filter.product_id ? "products" : "unknown";
+    const ids = Array.isArray(filter.product_id)
+      ? filter.product_id
+      : [filter.product_id];
+    const result = await this.find(collection, {
+      where: {
+        medusa_id: {
+          in: ids.join(","),
+        },
+      },
+      depth: 2,
+    });
+
+    return result.docs.map((doc) => ({
+      ...doc,
+      product_id: doc.medusa_id,
+    }));
   }
 }
