@@ -30,7 +30,7 @@ const prepareCreateProducts = (data: { products: Product[] }) => {
       variants: product.variants.map((variant) => ({
         medusa_id: variant.id,
         title: variant.title,
-        options_values: variant.options.map((option) => ({
+        option_values: variant.options.map((option) => ({
           medusa_id: option.id,
           medusa_option_id: option.option?.id,
           value: option.value,
@@ -63,13 +63,13 @@ export const createPayloadProductsWorkflow = createWorkflow(
 
     const updateData = transform({ items, products }, (data) => {
       const productMap = new Map(
-        data.products.map((product) => [product.id, product])
+        data.products.map((product) => [product.id, product]),
       );
-      
+
       return data.items.map((item) => {
         const product = productMap.get(item.medusa_id);
         const existingMetadata = product?.metadata || {};
-        
+
         return {
           id: item.medusa_id,
           metadata: {
