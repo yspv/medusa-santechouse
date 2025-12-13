@@ -22,7 +22,7 @@ const prepareCreateProducts = (data: { products: Product[] }) => {
       medusa_id: product.id,
       title: product.title,
       subtitle: product.subtitle,
-      description: product.description,
+      description: product.description || "",
       options: product.options.map((option) => ({
         title: option.title,
         medusa_id: option.id,
@@ -32,7 +32,7 @@ const prepareCreateProducts = (data: { products: Product[] }) => {
         title: variant.title,
         options_values: variant.options.map((option) => ({
           medusa_id: option.id,
-          medusa_option_id: option.option_id,
+          medusa_option_id: option.option?.id,
           value: option.value,
         })),
       })),
@@ -61,13 +61,23 @@ export const createPayloadProductsWorkflow = createWorkflow(
 
     const { items } = createPayloadItemsStep(createData);
 
-    const updateData = transform({ items }, (data) => {
-      return data.items.map((item) => ({
-        id: item.medusa_id,
-        metadata: {
-          payload_id: item.id,
-        },
-      }));
+    const updateData = transform({ items, products }, (data) => {
+      const productMap = new Map(
+        data.products.map((product) => [product.id, product])
+      );
+      
+      return data.items.map((item) => {
+        const product = productMap.get(item.medusa_id);
+        const existingMetadata = product?.metadata || {};
+        
+        return {
+          id: item.medusa_id,
+          metadata: {
+            ...existingMetadata,
+            payload_id: item.id,
+          },
+        };
+      });
     });
 
     updateProductsWorkflow.runAsStep({

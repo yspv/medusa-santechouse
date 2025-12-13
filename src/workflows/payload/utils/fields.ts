@@ -11,4 +11,5 @@ export const createPayloadProductsFields = [
   "variants.options.*",
   "thumbnail",
   "images.*",
+  "metadata",
 ];
