@@ -31,5 +31,8 @@ export const createPayloadItemsStep = createStep(
   async (data, { container }) => {
     const service = container.resolve<PayloadModuleService>(PAYLOAD_MODULE);
     if (!data) return;
+    await service.delete(data.collection, {
+      where: { id: { in: data.ids.join(",") } },
+    });
   },
 );
