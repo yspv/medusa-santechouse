@@ -20,7 +20,7 @@ export interface PayloadQueryOptions {
   depth?: number;
   locale?: string;
   fallbackLocale?: string;
-  select?: string;
+  select?: Record<string, any>;
   populate?: string;
   limit?: number;
   page?: number;

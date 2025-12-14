@@ -1,5 +1,5 @@
 import { MedusaError } from "@medusajs/framework/utils";
-import { FindConfig, Logger } from "@medusajs/framework/types";
+import { FindConfig } from "@medusajs/framework/types";
 import {
   PayloadApiResponse,
   PayloadBulkResult,
@@ -23,7 +23,7 @@ class PayloadModuleService {
     this.baseUrl = `${options.serverUrl}/api`;
     this.headers = {
       "Content-Type": "application/json",
-      Authorization: `${options.userCollection || "users"} API-Key ${options.userCollection}`,
+      Authorization: `${options.userCollection || "users"} API-Key ${options.apiKey}`,
     };
   }
 
@@ -41,7 +41,7 @@ class PayloadModuleService {
         },
       });
       if (!response.ok) {
-        const errorData = await response.json().catch(() => {});
+        const errorData = await response.json().catch(() => ({}));
         throw new MedusaError(
           MedusaError.Types.UNEXPECTED_STATE,
           `Paylaod API error: ${response.status} ${response.statusText}. ${
@@ -56,6 +56,13 @@ class PayloadModuleService {
         `Failed to communicate with Payload CMS: ${JSON.stringify(err)}`,
       );
     }
+  }
+
+  private mapSelectParams(selects: string[]) {
+    return {
+      ...Object.fromEntries(selects.map((s) => [s, true])),
+      medusa_id: true,
+    };
   }
 
   async create<T extends PayloadCollectionItem = PayloadCollectionItem>(
@@ -151,17 +158,28 @@ class PayloadModuleService {
     return result;
   }
 
-  async list(filter: { product_id: string | string[] }) {
+  async list(
+    filter: { product_id: string | string[]; locale?: string },
+    config?: FindConfig<any>,
+  ) {
     const collection = filter.product_id ? "products" : "unknown";
     const ids = Array.isArray(filter.product_id)
       ? filter.product_id
       : [filter.product_id];
+    const take = config?.take;
+    const skip = config?.skip;
     const result = await this.find(collection, {
       where: {
         medusa_id: {
           in: ids.join(","),
         },
       },
+      locale: filter.locale,
+      limit: take || undefined,
+      page: take && skip ? Math.floor(skip / take) + 1 : undefined,
+      select: config?.select?.length
+        ? this.mapSelectParams(config.select as string[])
+        : undefined,
       depth: 2,
     });
 
@@ -169,14 +187,6 @@ class PayloadModuleService {
       ...doc,
       product_id: doc.medusa_id,
     }));
-  }
-  async listAndCount(
-    filter: {
-      product_id: string | string[];
-    },
-    config?: FindConfig<any> | undefined,
-  ) {
-    console.log("__LIST_AND_COUNT__");
   }
 }
 
