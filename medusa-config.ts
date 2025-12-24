@@ -120,5 +120,8 @@ module.exports = defineConfig({
     {
       resolve: "@medusajs/translation",
     },
+    {
+      resolve: "./src/modules/product-media",
+    },
   ],
 });
