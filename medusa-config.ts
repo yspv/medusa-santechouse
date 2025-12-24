@@ -28,6 +28,7 @@ module.exports = defineConfig({
   },
   featureFlags: {
     index_engine: false,
+    translation: true,
   },
   plugins: [
     {
@@ -115,6 +116,9 @@ module.exports = defineConfig({
         apiKey: process.env.PAYLOAD_API_KEY,
         userCollection: process.env.PAYLOAD_USER_COLLECTION || "users",
       },
+    },
+    {
+      resolve: "@medusajs/translation",
     },
   ],
 });
