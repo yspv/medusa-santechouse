@@ -1,57 +1,50 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http";
-import { createCategoryImagesWorkflow } from "@/workflows/product-media/workflows/create-category-images";
+import { updateCategoryImagesWorkflow } from "@/workflows/product-media/workflows/update-category-images";
+import { deleteCategoryImagesWorkflow } from "@/workflows/product-media/workflows/delete-category-images";
 import { z } from "zod";
 
-export const CreateCategoryImagesSchema = z.object({
-  images: z
+export const UpdateCategoryImagesSchema = z.object({
+  updates: z
     .array(
       z.object({
+        id: z.string(),
         type: z.enum(["thumbnail", "image"]),
-        url: z.string(),
-        file_id: z.string(),
       }),
     )
-    .min(1, "At least one image is required"),
+    .min(1, "At least one update is required"),
 });
 
-type CreateCategoryImagesInput = z.infer<typeof CreateCategoryImagesSchema>;
+export const DeleteCategoryImagesSchema = z.object({
+  ids: z.array(z.string()).min(1, "At least one ID is required"),
+});
+
+type UpdateCategoryImagesInput = z.infer<typeof UpdateCategoryImagesSchema>;
+type DeleteCategoryImagesInput = z.infer<typeof DeleteCategoryImagesSchema>;
 
 export async function POST(
-  req: MedusaRequest<CreateCategoryImagesInput>,
+  req: MedusaRequest<UpdateCategoryImagesInput>,
   res: MedusaResponse,
 ): Promise<void> {
-  const { category_id } = req.params;
-  const { images } = req.validatedBody;
+  const { updates } = req.validatedBody;
 
-  // Add category_id to each image
-  const category_images = images.map((image) => ({
-    ...image,
-    category_id,
-  }));
-
-  const { result } = await createCategoryImagesWorkflow(req.scope).run({
-    input: {
-      category_images,
-    },
+  const { result } = await updateCategoryImagesWorkflow(req.scope).run({
+    input: { updates },
   });
 
   res.status(200).json({ category_images: result });
 }
 
-export async function GET(
-  req: MedusaRequest,
+export async function DELETE(
+  req: MedusaRequest<DeleteCategoryImagesInput>,
   res: MedusaResponse,
 ): Promise<void> {
-  const { category_id } = req.params;
-  const query = req.scope.resolve("query");
+  const { ids } = req.validatedBody;
 
-  const { data: categoryImages } = await query.graph({
-    entity: "product_category_image",
-    fields: ["*"],
-    filters: {
-      category_id,
-    },
+  await deleteCategoryImagesWorkflow(req.scope).run({
+    input: { ids },
   });
 
-  res.status(200).json({ category_images: categoryImages });
+  res.status(200).json({
+    deleted: ids,
+  });
 }
