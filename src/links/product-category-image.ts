@@ -10,6 +10,7 @@ export default defineLink(
   },
   {
     ...ProductMediaModule.linkable.productCategoryImage.id,
+    alias: "images",
     primaryKey: "category_id",
   },
   {

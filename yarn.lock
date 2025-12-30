@@ -461,19 +461,19 @@ __metadata:
   linkType: hard
 
 "@aws-sdk/lib-storage@npm:^3.556.0":
-  version: 3.955.0
-  resolution: "@aws-sdk/lib-storage@npm:3.955.0"
+  version: 3.958.0
+  resolution: "@aws-sdk/lib-storage@npm:3.958.0"
   dependencies:
-    "@smithy/abort-controller": ^4.2.6
-    "@smithy/middleware-endpoint": ^4.4.0
-    "@smithy/smithy-client": ^4.10.1
+    "@smithy/abort-controller": ^4.2.7
+    "@smithy/middleware-endpoint": ^4.4.1
+    "@smithy/smithy-client": ^4.10.2
     buffer: 5.6.0
     events: 3.3.0
     stream-browserify: 3.0.0
     tslib: ^2.6.2
   peerDependencies:
-    "@aws-sdk/client-s3": ^3.955.0
-  checksum: d6ae81d295b038a4cf5dab14720cfe8316e99aa479992702bf86973f848b48341a3a034f8aba096f3c8f399e71b979530af0c0c4435fa23c677ae9566cd36364
+    "@aws-sdk/client-s3": ^3.958.0
+  checksum: c68cb58032646af3af4552e012f3bb73d70ce95915d3671bdab9348df478123898c36b9a527104cd959171b9fe99adec70e5b307728829b1262f6d56b46dea82
   languageName: node
   linkType: hard
 
@@ -10389,7 +10389,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@smithy/abort-controller@npm:^4.2.6, @smithy/abort-controller@npm:^4.2.7":
+"@smithy/abort-controller@npm:^4.2.7":
   version: 4.2.7
   resolution: "@smithy/abort-controller@npm:4.2.7"
   dependencies:
@@ -10669,7 +10669,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@smithy/middleware-endpoint@npm:^4.4.0, @smithy/middleware-endpoint@npm:^4.4.1":
+"@smithy/middleware-endpoint@npm:^4.4.1":
   version: 4.4.1
   resolution: "@smithy/middleware-endpoint@npm:4.4.1"
   dependencies:
@@ -10935,7 +10935,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@smithy/smithy-client@npm:^4.10.1":
+"@smithy/smithy-client@npm:^4.10.2":
   version: 4.10.2
   resolution: "@smithy/smithy-client@npm:4.10.2"
   dependencies:
