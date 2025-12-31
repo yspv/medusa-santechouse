@@ -1,4 +1,9 @@
-import { loadEnv, defineConfig } from "@medusajs/framework/utils";
+import {
+  loadEnv,
+  defineConfig,
+  Modules,
+  ContainerRegistrationKeys,
+} from "@medusajs/framework/utils";
 import path from "path";
 
 loadEnv(process.env.NODE_ENV || "development", process.cwd());
@@ -122,6 +127,26 @@ module.exports = defineConfig({
     },
     {
       resolve: "./src/modules/product-media",
+    },
+    {
+      resolve: "@medusajs/medusa/auth",
+      dependencies: [
+        Modules.CACHE,
+        ContainerRegistrationKeys.LOGGER,
+        Modules.EVENT_BUS,
+      ],
+      options: {
+        providers: [
+          {
+            resolve: "@medusajs/medusa/auth-emailpass",
+            id: "emailpass",
+          },
+          {
+            resolve: "./src/modules/phone-password-auth",
+            id: "phonepass",
+          },
+        ],
+      },
     },
   ],
 });
