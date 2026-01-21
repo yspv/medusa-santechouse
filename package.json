@@ -23,7 +23,6 @@
     "test:unit": "TEST_TYPE=unit NODE_OPTIONS=--experimental-vm-modules jest --silent --runInBand --forceExit"
   },
   "dependencies": {
-    "@agilo/medusa-analytics-plugin": "^1.2.1",
     "@medusajs/admin-sdk": "2.12.3",
     "@medusajs/cache-redis": "^2.12.3",
     "@medusajs/cli": "2.12.3",
@@ -37,6 +36,7 @@
     "@opentelemetry/semantic-conventions": "1.x",
     "@sentry/node": "^10.27.0",
     "@sentry/opentelemetry-node": "^7.114.0",
+    "bcrypt": "^6.0.0",
     "lodash": "^4.17.21",
     "slugify": "^1.6.6"
   },
@@ -44,6 +44,7 @@
     "@medusajs/test-utils": "2.12.3",
     "@swc/core": "1.5.7",
     "@swc/jest": "^0.2.36",
+    "@types/bcrypt": "^6.0.0",
     "@types/jest": "^29.5.13",
     "@types/lodash": "^4.17.20",
     "@types/lodash.debounce": "^4.0.9",
