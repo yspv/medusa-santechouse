@@ -2,7 +2,6 @@ import {
   AbstractAuthModuleProvider,
   isPresent,
   MedusaError,
-  Modules,
 } from "@medusajs/framework/utils";
 import {
   AuthIdentityDTO,
@@ -12,7 +11,7 @@ import {
   Logger,
 } from "@medusajs/framework/types";
 import { ContainerRegistrationKeys } from "@medusajs/framework/utils";
-import scrypt from "scrypt-kdf";
+import bcrypt from "bcrypt";
 import { isString } from "@medusajs/framework/utils";
 
 type InjectedDependencies = {
@@ -33,9 +32,12 @@ class PhonePasswordAuthProviderService extends AbstractAuthModuleProvider {
   }
 
   async hashPassword(password: string) {
-    const hashConfig = { logN: 15, r: 8, p: 1 };
-    const passwordHash = await scrypt.kdf(password, hashConfig);
-    return passwordHash.toString("base64");
+    const salt = 16;
+    return bcrypt.hash(password, salt);
+  }
+
+  async verifyPassword(password: string, hash: string) {
+    return bcrypt.compare(password, hash);
   }
 
   async upsertAuthIdentity(
@@ -44,6 +46,7 @@ class PhonePasswordAuthProviderService extends AbstractAuthModuleProvider {
       phone: string;
       password: string;
       authIdentityService: AuthIdentityProviderService;
+      isHash?: boolean;
     },
   ) {
     const passwordHash = await this.hashPassword(props.password);
@@ -52,12 +55,12 @@ class PhonePasswordAuthProviderService extends AbstractAuthModuleProvider {
         ? await props.authIdentityService.create({
             entity_id: props.phone,
             provider_metadata: {
-              password: passwordHash,
+              password: props.isHash ? props.password : passwordHash,
             },
           })
         : await props.authIdentityService.update(props.phone, {
             provider_metadata: {
-              password: passwordHash,
+              password: props.isHash ? props.password : passwordHash,
             },
           });
 
@@ -73,7 +76,8 @@ class PhonePasswordAuthProviderService extends AbstractAuthModuleProvider {
     data: AuthenticationInput,
     authIdentityProviderService: AuthIdentityProviderService,
   ): Promise<AuthenticationResponse> {
-    const { phone, password } = data.body || {};
+    const { phone, password, isHash } = data.body || {};
+    const hash = isHash === "true";
     if (!isString(phone)) {
       return {
         success: false,
@@ -94,6 +98,7 @@ class PhonePasswordAuthProviderService extends AbstractAuthModuleProvider {
         const updatedAuthIdentity = await this.upsertAuthIdentity("update", {
           phone,
           password,
+          isHash: hash,
           authIdentityService: authIdentityProviderService,
         });
         return {
@@ -112,6 +117,7 @@ class PhonePasswordAuthProviderService extends AbstractAuthModuleProvider {
       const createdAuthIdentity = await this.upsertAuthIdentity("create", {
         phone,
         password,
+        isHash: hash,
         authIdentityService: authIdentityProviderService,
       });
       return {
@@ -168,8 +174,7 @@ class PhonePasswordAuthProviderService extends AbstractAuthModuleProvider {
 
     const passwordHash = providerIdentity?.provider_metadata?.password;
     if (isString(passwordHash)) {
-      const buf = Buffer.from(passwordHash, "base64");
-      const success = await scrypt.verify(buf, password);
+      const success = await this.verifyPassword(password, passwordHash);
       if (success) {
         const copy = JSON.parse(JSON.stringify(authIdentity));
         const providerIdentity = copy.provider_identities?.find(
