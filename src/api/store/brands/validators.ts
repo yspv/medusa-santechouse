@@ -21,3 +21,8 @@ export const StoreBrandsParams = createFindParams({
   offset: 0,
   limit: 50,
 }).merge(StoreBrandsParamsFields);
+
+export const StoreBrandProductsParams = createFindParams({
+  offset: 0,
+  limit: 50,
+});
