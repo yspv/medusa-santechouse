@@ -13,8 +13,8 @@ export const CashbackAccountListSection = (props: {
   const { t } = useTranslation();
   const otherAccounts = React.useMemo<AdminCashbackAccount[] | undefined>(
     () =>
-      account.customer.cashback_accounts?.filter(
-        (a: AdminCashbackAccount) => a.currency_code !== account.currency_code,
+      account.customer?.cashback_accounts?.filter(
+        (a: AdminCashbackAccount) => a && a.currency_code !== account.currency_code,
       ),
     [account],
   );
