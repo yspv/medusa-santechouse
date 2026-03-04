@@ -123,6 +123,9 @@ module.exports = defineConfig({
       resolve: "./src/modules/product-media",
     },
     {
+      resolve: "./src/modules/invoice-generator",
+    },
+    {
       resolve: "@medusajs/medusa/auth",
       dependencies: [
         Modules.CACHE,

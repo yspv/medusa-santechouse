@@ -9,6 +9,5 @@ export default defineLink(
   },
   {
     linkable: BrandModule.linkable.brand,
-    filterable: ["id", "name"],
   },
 );

@@ -1,4 +1,5 @@
 import { MiddlewareRoute } from "@medusajs/medusa";
+import { validateAndTransformBody } from "@medusajs/framework/http";
 import { brandsMiddlewares } from "./brands/middlewares";
 import { productsMiddlewares } from "./products/middlewares";
 import { cashbackMiddlewares } from "./cashbacks/middlewares";
@@ -8,6 +9,7 @@ import { cashbackTransactionMiddlewares } from "./cashback-transactions/middlewa
 import { customerMiddlewares } from "./customers/middlewares";
 import { payloadMiddlewares } from "./payload/middlewares";
 import { categoryMiddlewares } from "./categories/middlewares";
+import { PostInvoiceConfigSchema } from "./invoice-config/route";
 
 export const adminMiddlewares: MiddlewareRoute[] = [
   ...brandsMiddlewares,
@@ -19,4 +21,9 @@ export const adminMiddlewares: MiddlewareRoute[] = [
   ...customerMiddlewares,
   ...payloadMiddlewares,
   ...categoryMiddlewares,
+  {
+    matcher: "/admin/invoice-config",
+    methods: ["POST"],
+    middlewares: [validateAndTransformBody(PostInvoiceConfigSchema)],
+  },
 ];

@@ -36,8 +36,10 @@
     "@opentelemetry/semantic-conventions": "1.x",
     "@sentry/node": "^10.27.0",
     "@sentry/opentelemetry-node": "^7.114.0",
+    "axios": "^1.13.6",
     "bcrypt": "^6.0.0",
     "lodash": "^4.17.21",
+    "pdfmake": "^0.2.20",
     "slugify": "^1.6.6"
   },
   "devDependencies": {
@@ -49,6 +51,7 @@
     "@types/lodash": "^4.17.20",
     "@types/lodash.debounce": "^4.0.9",
     "@types/node": "^20.0.0",
+    "@types/pdfmake": "^0.2.11",
     "@types/react": "^18.3.2",
     "@types/react-dom": "^18.2.25",
     "jest": "^29.7.0",
