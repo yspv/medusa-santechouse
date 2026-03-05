@@ -47,6 +47,31 @@ export const useCashbackTransactions = (
   return { ...data, ...rest };
 };
 
+export const useCashbackTransaction = (
+  id: string,
+  query?: AdminCashbackTransactionParams,
+  options?: Omit<
+    UseQueryOptions<
+      AdminCashbackTransactionResponse,
+      FetchError,
+      AdminCashbackTransactionResponse,
+      QueryKey
+    >,
+    "queryKey" | "queryFn"
+  >,
+) => {
+  const { data, ...rest } = useQuery({
+    queryKey: cashbackTrasactionQueryKeys.detail(id),
+    queryFn: () =>
+      sdk.client.fetch<AdminCashbackTransactionResponse>(
+        `/admin/cashback-transactions/${id}`,
+        { query },
+      ),
+    ...options,
+  });
+  return { ...data, ...rest };
+};
+
 export const useRedeemCashbackTransaction = (
   options?: UseMutationOptions<
     AdminCashbackTransactionResponse,

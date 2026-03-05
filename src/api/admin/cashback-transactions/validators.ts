@@ -1,5 +1,10 @@
-import { createFindParams } from "@medusajs/medusa/api/utils/validators";
+import {
+  createFindParams,
+  createSelectParams,
+} from "@medusajs/medusa/api/utils/validators";
 import z from "zod";
+
+export const AdminCashbackTransactionParams = createSelectParams();
 
 export const AdminCashbackTransactionsParamsFields = z.object({
   account_id: z.union([z.string(), z.string().array()]).optional(),

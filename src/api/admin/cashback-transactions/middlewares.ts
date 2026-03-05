@@ -3,9 +3,11 @@ import {
   validateAndTransformBody,
   validateAndTransformQuery,
 } from "@medusajs/framework";
-import { AdminCashbackTransactionsParams } from "./validators";
+import {
+  AdminCashbackTransactionParams,
+  AdminCashbackTransactionsParams,
+} from "./validators";
 import * as QueryConfig from "./query-config";
-import { AdminCashbackTransactionParams } from "../cashback-accounts/validators";
 import { AdminRedeemCashback } from "../cashbacks/validators";
 
 export const cashbackTransactionMiddlewares: MiddlewareRoute[] = [
@@ -16,6 +18,16 @@ export const cashbackTransactionMiddlewares: MiddlewareRoute[] = [
       validateAndTransformQuery(
         AdminCashbackTransactionsParams,
         QueryConfig.listCashbackTransactionsConfig,
+      ),
+    ],
+  },
+  {
+    method: ["GET"],
+    matcher: "/admin/cashback-transactions/:id",
+    middlewares: [
+      validateAndTransformQuery(
+        AdminCashbackTransactionParams,
+        QueryConfig.retrieveCashbackTransactionConfig,
       ),
     ],
   },

@@ -5,7 +5,6 @@ import { PageProps } from "../types";
 
 export const SingleColumnPage = <TData,>({
   children,
-  widgets,
   /**
    * Data of the page which is passed to Widgets, JSON view, and Metadata view.
    */
@@ -23,7 +22,7 @@ export const SingleColumnPage = <TData,>({
    */
   showMetadata,
 }: PageProps<TData>) => {
-  const { before, after } = widgets;
+
   const widgetProps = { data };
 
   if (showJSON && !data) {
@@ -48,13 +47,7 @@ export const SingleColumnPage = <TData,>({
 
   return (
     <div className="flex flex-col gap-y-3">
-      {before.map((Component, i) => {
-        return <Component {...widgetProps} key={i} />;
-      })}
       {children}
-      {after.map((Component, i) => {
-        return <Component {...widgetProps} key={i} />;
-      })}
       {showMetadata && <MetadataSection data={data!} />}
       {showJSON && <JsonViewSection data={data!} />}
       {hasOutlet && <Outlet />}
