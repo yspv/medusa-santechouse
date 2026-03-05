@@ -63,14 +63,16 @@ class InvoiceGeneratorService extends MedusaService({
         // Create table for order items
         const itemsTable = [
             [
-                { text: "Item", style: "tableHeader" },
-                { text: "Quantity", style: "tableHeader" },
-                { text: "Unit Price", style: "tableHeader" },
-                { text: "Total", style: "tableHeader" },
+                { text: "Товар", style: "tableHeader" },
+                { text: "Бренд", style: "tableHeader" },
+                { text: "Кол-во", style: "tableHeader" },
+                { text: "Цена за ед.", style: "tableHeader" },
+                { text: "Итого", style: "tableHeader" },
             ],
             ...(await Promise.all(
-                params.items.map(async (item) => [
-                    { text: item.title || "Unknown Item", style: "tableRow" },
+                params.items.map(async (item: any) => [
+                    { text: item.title || "Неизвестный товар", style: "tableRow" },
+                    { text: item.variant?.product?.brand?.name || "-", style: "tableRow" },
                     { text: item.quantity.toString(), style: "tableRow" },
                     {
                         text: await this.formatAmount(
@@ -95,44 +97,45 @@ class InvoiceGeneratorService extends MedusaService({
 
         return {
             pageSize: "A4",
-            pageMargins: [40, 60, 40, 60],
-            header: {
-                margin: [40, 20, 40, 0],
-                columns: [
-                    // Company Logo + Name
-                    {
-                        width: "*",
-                        stack: [
-                            ...(config.company_logo
-                                ? [
-                                    {
-                                        image: await this.imageUrlToBase64(config.company_logo),
-                                        width: 80,
-                                        height: 40,
-                                        fit: [80, 40],
-                                        margin: [0, 0, 0, 10],
-                                    },
-                                ]
-                                : []),
-                            {
-                                text: config.company_name || "Your Company Name",
-                                style: "companyName",
-                                margin: [0, 0, 0, 2],
-                            },
-                        ],
-                    },
-                    // Invoice Title
-                    {
-                        width: "auto",
-                        stack: [
-                            { text: "INVOICE", style: "invoiceTitle" },
-                            { text: invoiceId, style: "invoiceId", margin: [0, 4, 0, 0] },
-                        ],
-                        alignment: "right",
-                    },
-                ],
-            },
+            pageMargins: [40, 40, 40, 60],
             content: [
+                // Header (Logo, Company Name, Invoice Title)
+                {
+                    columns: [
+                        // Company Logo + Name
+                        {
+                            width: "*",
+                            stack: [
+                                ...(config.company_logo
+                                    ? [
+                                        {
+                                            image: await this.imageUrlToBase64(config.company_logo),
+                                            width: 60,
+                                            height: 30,
+                                            fit: [60, 30],
+                                            margin: [0, 0, 0, 10],
+                                        },
+                                    ]
+                                    : []),
+                                {
+                                    text: config.company_name || "Your Company Name",
+                                    style: "companyName",
+                                    margin: [0, 0, 0, 2],
+                                },
+                            ],
+                        },
+                        // Invoice Title
+                        {
+                            width: "auto",
+                            stack: [
+                                { text: "СЧЁТ-ФАКТУРА", style: "invoiceTitle" },
+                                { text: invoiceId, style: "invoiceId", margin: [0, 4, 0, 0] },
+                            ],
+                            alignment: "right",
+                        },
+                    ],
+                    margin: [0, 0, 0, 20],
+                },
                 // Company & Invoice Info
                 {
                     columns: [
@@ -147,13 +150,13 @@ class InvoiceGeneratorService extends MedusaService({
                         {
                             width: "auto",
                             stack: [
-                                { text: `Invoice Date: ${invoiceDate}`, style: "invoiceDetail" },
+                                { text: `Дата счета: ${invoiceDate}`, style: "invoiceDetail" },
                                 {
-                                    text: `Order #: ${params.order.display_id || params.order.id}`,
+                                    text: `Заказ №: ${params.order.display_id || params.order.id}`,
                                     style: "invoiceDetail",
                                 },
                                 {
-                                    text: `Order Date: ${new Date(
+                                    text: `Дата заказа: ${new Date(
                                         params.order.created_at as unknown as string
                                     ).toLocaleDateString()}`,
                                     style: "invoiceDetail",
@@ -170,37 +173,7 @@ class InvoiceGeneratorService extends MedusaService({
                         {
                             width: "*",
                             stack: [
-                                { text: "Bill To:", style: "sectionHeader" },
-                                ...(params.order.billing_address
-                                    ? [
-                                        {
-                                            text: [
-                                                params.order.billing_address.first_name || "",
-                                                " ",
-                                                params.order.billing_address.last_name || "",
-                                            ],
-                                            style: "addressText",
-                                        },
-                                        {
-                                            text: params.order.billing_address.address_1 || "",
-                                            style: "addressText",
-                                        },
-                                        {
-                                            text: [
-                                                params.order.billing_address.city || "",
-                                                ", ",
-                                                params.order.billing_address.country_code || "",
-                                            ],
-                                            style: "addressText",
-                                        },
-                                    ]
-                                    : []),
-                            ],
-                        },
-                        {
-                            width: "*",
-                            stack: [
-                                { text: "Ship To:", style: "sectionHeader" },
+                                { text: "Доставить:", style: "sectionHeader" },
                                 ...(params.order.shipping_address
                                     ? [
                                         {
@@ -209,11 +182,11 @@ class InvoiceGeneratorService extends MedusaService({
                                                 " ",
                                                 params.order.shipping_address.last_name || "",
                                             ],
-                                            style: "addressText",
+                                            style: "addressText"
                                         },
                                         {
                                             text: params.order.shipping_address.address_1 || "",
-                                            style: "addressText",
+                                            style: "addressText"
                                         },
                                         {
                                             text: [
@@ -221,20 +194,20 @@ class InvoiceGeneratorService extends MedusaService({
                                                 ", ",
                                                 params.order.shipping_address.country_code || "",
                                             ],
-                                            style: "addressText",
-                                        },
+                                            style: "addressText"
+                                        }
                                     ]
-                                    : []),
-                            ],
-                        },
+                                    : [])
+                            ]
+                        }
                     ],
-                    margin: [0, 0, 0, 20],
+                    margin: [0, 0, 0, 20]
                 },
                 // Items Table
                 {
                     table: {
                         headerRows: 1,
-                        widths: ["*", "auto", "auto", "auto"],
+                        widths: ["*", "auto", "auto", "auto", "auto"],
                         body: itemsTable,
                     },
                     layout: {
@@ -256,7 +229,7 @@ class InvoiceGeneratorService extends MedusaService({
                             table: {
                                 body: [
                                     [
-                                        { text: "Subtotal", style: "totalsLabel" },
+                                        { text: "Подитог", style: "totalsLabel" },
                                         {
                                             text: await this.formatAmount(
                                                 Number(params.order.subtotal || 0),
@@ -266,17 +239,7 @@ class InvoiceGeneratorService extends MedusaService({
                                         },
                                     ],
                                     [
-                                        { text: "Tax", style: "totalsLabel" },
-                                        {
-                                            text: await this.formatAmount(
-                                                Number(params.order.tax_total || 0),
-                                                params.order.currency_code
-                                            ),
-                                            style: "totalsValue",
-                                        },
-                                    ],
-                                    [
-                                        { text: "Shipping", style: "totalsLabel" },
+                                        { text: "Доставка", style: "totalsLabel" },
                                         {
                                             text: await this.formatAmount(
                                                 Number(
@@ -290,16 +253,18 @@ class InvoiceGeneratorService extends MedusaService({
                                             style: "totalsValue",
                                         },
                                     ],
-                                    [
-                                        { text: "Discount", style: "totalsLabel" },
-                                        {
-                                            text: `-${await this.formatAmount(
-                                                Number(params.order.discount_total || 0),
-                                                params.order.currency_code
-                                            )}`,
-                                            style: "totalsValue",
-                                        },
-                                    ],
+                                    ...(params.order.discount_total && Number(params.order.discount_total) > 0 ? [
+                                        [
+                                            { text: "Скидка", style: "totalsLabel" },
+                                            {
+                                                text: `-${await this.formatAmount(
+                                                    Number(params.order.discount_total || 0),
+                                                    params.order.currency_code
+                                                )}`,
+                                                style: "totalsValue",
+                                            },
+                                        ]
+                                    ] : []),
                                     [
                                         {
                                             canvas: [
@@ -311,7 +276,7 @@ class InvoiceGeneratorService extends MedusaService({
                                         {}
                                     ],
                                     [
-                                        { text: "TOTAL", style: "totalLabel" },
+                                        { text: "ИТОГО", style: "totalLabel" },
                                         {
                                             text: await this.formatAmount(
                                                 Number(params.order.total || 0),
@@ -329,7 +294,7 @@ class InvoiceGeneratorService extends MedusaService({
                 // Notes
                 ...(config.notes
                     ? [
-                        { text: "Notes", style: "sectionHeader", margin: [0, 20, 0, 5] },
+                        { text: "Примечания", style: "sectionHeader", margin: [0, 20, 0, 5] },
                         { text: config.notes, style: "notesText" },
                     ]
                     : []),

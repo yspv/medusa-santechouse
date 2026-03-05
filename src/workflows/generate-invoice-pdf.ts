@@ -28,6 +28,7 @@ export const generateInvoicePdfWorkflow = createWorkflow(
                 "items.*",
                 "items.variant.*",
                 "items.variant.product.*",
+                "items.variant.product.brand.*",
                 "shipping_address.*",
                 "billing_address.*",
                 "shipping_methods.*",
