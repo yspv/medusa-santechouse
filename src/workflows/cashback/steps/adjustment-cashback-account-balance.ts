@@ -6,6 +6,7 @@ import { createStep, StepResponse } from "@medusajs/framework/workflows-sdk";
 export type AdjustmentCashbackAccountBalanceStepInput = {
   account_id: string;
   amount: number;
+  reference_id?: string;
 };
 
 export const adjustmentCashbackAccountBalanceStepId =
@@ -21,6 +22,7 @@ export const adjustmentCashbackAccountBalanceStep = createStep(
       type: CashbackTransactionType.ADJUSTMENT,
       currency_code: prevAccount.currency_code,
       amount: data.amount,
+      reference_id: data.reference_id,
     });
     const account = await locking.execute(prevAccount.id, () => {
       return service.updateCashbackAccounts({
