@@ -34,7 +34,7 @@ export const CashbackTransactionGeneralSection = (props: {
                     title={t("cashback-accounts.domain")}
                     value={
                         <Link
-                            to={`/admin/cashbacks/accounts/${transaction.account.id}`}
+                            to={`/cashbacks/accounts/${transaction.account.id}`}
                             className="text-ui-fg-interactive hover:text-ui-fg-interactive-hover"
                         >
                             {transaction.account.customer?.first_name} {transaction.account.customer?.last_name}
