@@ -4,6 +4,7 @@ import { JsonViewSection } from "../../../components/common/json-view-section";
 import { MetadataSection } from "../../../components/common/metadata-section";
 import { BrandGeneralSection } from "../components/brand-details/brand-general-section";
 import { BrandProductSection } from "../components/brand-details/brand-product-section";
+import { BrandImageSection } from "../components/brand-details/brand-image-section";
 
 const BrandDetails = () => {
   const { brandId } = useParams();
@@ -17,6 +18,7 @@ const BrandDetails = () => {
   return (
     <div className="flex flex-col gap-y-4">
       <BrandGeneralSection brand={brand} />
+      <BrandImageSection brand={brand} />
       <BrandProductSection brand={brand} />
       <JsonViewSection data={brand} />
       <MetadataSection data={brand} />

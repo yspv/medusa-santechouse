@@ -136,3 +136,98 @@ export const useDeleteBrand = (
     ...options,
   });
 };
+
+export const useBrandImages = (
+  id: string,
+  options?: Omit<
+    UseQueryOptions<
+      { brand_images: any[] },
+      FetchError,
+      { brand_images: any[] },
+      QueryKey
+    >,
+    "queryFn" | "queryKey"
+  >,
+) => {
+  const { data, ...rest } = useQuery({
+    queryKey: [...brandsQueryKeys.detail(id), "images"],
+    queryFn: () =>
+      sdk.client.fetch<{ brand_images: any[] }>(`/admin/brands/${id}/images`),
+    ...options,
+  });
+  return { ...data, ...rest };
+};
+
+export const useCreateBrandImages = (
+  id: string,
+  options?: UseMutationOptions<
+    { brand_images: any[] },
+    FetchError,
+    { images: { type: string; url: string; file_id: string }[] }
+  >,
+) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (payload) =>
+      sdk.client.fetch(`/admin/brands/${id}/images`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: payload,
+      }),
+    onSuccess: (data, variables, context) => {
+      queryClient.invalidateQueries({
+        queryKey: [...brandsQueryKeys.detail(id), "images"],
+      });
+      options?.onSuccess?.(data, variables, context);
+    },
+    ...options,
+  });
+};
+
+export const useUpdateBrandImages = (
+  id: string,
+  options?: UseMutationOptions<
+    { brand_images: any[] },
+    FetchError,
+    { updates: { id: string; type: string }[] }
+  >,
+) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (payload) =>
+      sdk.client.fetch(`/admin/brands/${id}/images/batch`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: payload,
+      }),
+    onSuccess: (data, variables, context) => {
+      queryClient.invalidateQueries({
+        queryKey: [...brandsQueryKeys.detail(id), "images"],
+      });
+      options?.onSuccess?.(data, variables, context);
+    },
+    ...options,
+  });
+};
+
+export const useDeleteBrandImages = (
+  id: string,
+  options?: UseMutationOptions<{ deleted: string[] }, FetchError, { ids: string[] }>,
+) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (payload) =>
+      sdk.client.fetch(`/admin/brands/${id}/images/batch`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: payload,
+      }),
+    onSuccess: (data, variables, context) => {
+      queryClient.invalidateQueries({
+        queryKey: [...brandsQueryKeys.detail(id), "images"],
+      });
+      options?.onSuccess?.(data, variables, context);
+    },
+    ...options,
+  });
+};
