@@ -6,6 +6,7 @@ export const defaultAdminBrandsFields = [
   "updated_at",
   "deleted_at",
   "metadata",
+  "images.*",
 ];
 
 export const defaultAdminBrandProductsFields = ["*product"];

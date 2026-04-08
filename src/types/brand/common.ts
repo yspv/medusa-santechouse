@@ -1,9 +1,19 @@
 import { BaseFilterable, MetadataType, ProductDTO } from "@medusajs/types";
 
+export interface BrandImageDTO {
+  id: string;
+  url: string;
+  file_id: string;
+  type: "thumbnail" | "image";
+  brand_id: string;
+  brand?: BrandDTO;
+}
+
 export interface BrandDTO {
   id: string;
   name: string;
   products?: ProductDTO[];
+  images?: BrandImageDTO[];
   is_active: boolean;
   created_at: Date | string;
   updated_at: Date | string;

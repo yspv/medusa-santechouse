@@ -11,6 +11,11 @@ import {
   AdminUpdateBrand,
 } from "./validators";
 import * as QueryConfig from "./query-config";
+import { CreateBrandImagesSchema } from "./[id]/images/route";
+import {
+  DeleteBrandImagesSchema,
+  UpdateBrandImagesSchema,
+} from "./[id]/images/batch/route";
 
 export const brandsMiddlewares: MiddlewareRoute[] = [
   {
@@ -69,5 +74,20 @@ export const brandsMiddlewares: MiddlewareRoute[] = [
         QueryConfig.listBrandProductsConfig,
       ),
     ],
+  },
+  {
+    matcher: "/admin/brands/:id/images",
+    method: ["POST"],
+    middlewares: [validateAndTransformBody(CreateBrandImagesSchema)],
+  },
+  {
+    matcher: "/admin/brands/:id/images/batch",
+    method: ["POST"],
+    middlewares: [validateAndTransformBody(UpdateBrandImagesSchema)],
+  },
+  {
+    matcher: "/admin/brands/:id/images/batch",
+    method: ["DELETE"],
+    middlewares: [validateAndTransformBody(DeleteBrandImagesSchema)],
   },
 ];
