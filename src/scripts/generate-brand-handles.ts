@@ -27,7 +27,7 @@ export default async function generateBrandHandles({ container }: ExecArgs) {
       continue;
     }
 
-    await brandService.updateBrands({ id: brand.id }, { handle });
+    await brandService.updateBrands({ id: brand.id, handle });
     logger.info(`Updated "${brand.name}" → handle: "${handle}"`);
     updated++;
   }
