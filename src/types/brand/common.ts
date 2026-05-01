@@ -26,6 +26,7 @@ export interface FilterableBrandProps
   extends BaseFilterable<FilterableBrandProps> {
   q?: string;
   id?: string | string[];
+  handle?: string | string[];
 }
 
 export interface CreateBrandDTO {

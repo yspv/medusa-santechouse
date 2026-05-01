@@ -7,6 +7,7 @@ import z from "zod";
 export const AdminBrandsParamsFields = z.object({
   q: z.string().optional(),
   id: z.union([z.string(), z.array(z.string())]).optional(),
+  handle: z.union([z.string(), z.array(z.string())]).optional(),
 });
 
 export const AdminGetBrandsParams = createFindParams({

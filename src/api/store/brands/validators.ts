@@ -11,6 +11,7 @@ export const StoreBrandParamsFields = z.object({
 export const StoreBrandsParamsFields = z.object({
   q: z.string().optional(),
   id: z.union([z.string(), z.array(z.string())]).optional(),
+  handle: z.union([z.string(), z.array(z.string())]).optional(),
 });
 
 export const StoreBrandParams = createSelectParams().merge(
