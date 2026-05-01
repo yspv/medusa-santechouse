@@ -16,6 +16,7 @@ export const BrandCreateForm = () => {
   const form = useForm<CreateBrandSchema>({
     defaultValues: {
       name: "",
+      handle: "",
       is_active: false,
     },
     resolver: zodResolver(CreateBrandSchema),
@@ -62,6 +63,23 @@ export const BrandCreateForm = () => {
                           autoComplete="off"
                           {...field}
                           placeholder="Acme"
+                        />
+                      </Form.Control>
+                      <Form.ErrorMessage />
+                    </Form.Item>
+                  )}
+                />
+                <Form.Field
+                  control={form.control}
+                  name="handle"
+                  render={({ field }) => (
+                    <Form.Item>
+                      <Form.Label>{t("fields.handle")}</Form.Label>
+                      <Form.Control>
+                        <Input
+                          autoComplete="off"
+                          {...field}
+                          placeholder="acme"
                         />
                       </Form.Control>
                       <Form.ErrorMessage />

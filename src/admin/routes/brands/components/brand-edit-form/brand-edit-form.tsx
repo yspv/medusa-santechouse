@@ -21,6 +21,7 @@ export const BrandEditForm = (props: BrandEditFormProps) => {
   const form = useForm<BrandEditSchema>({
     defaultValues: {
       name: brand.name,
+      handle: brand.handle,
       is_active: brand.is_active,
     },
     resolver: zodResolver(BrandEditSchema),
@@ -52,6 +53,19 @@ export const BrandEditForm = (props: BrandEditFormProps) => {
                   <Form.Control>
                     <Input autoComplete="off" {...field} />
                   </Form.Control>
+                </Form.Item>
+              )}
+            />
+            <Form.Field
+              control={form.control}
+              name="handle"
+              render={({ field }) => (
+                <Form.Item>
+                  <Form.Label>{t("fields.handle")}</Form.Label>
+                  <Form.Control>
+                    <Input autoComplete="off" {...field} />
+                  </Form.Control>
+                  <Form.ErrorMessage />
                 </Form.Item>
               )}
             />

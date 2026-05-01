@@ -12,6 +12,7 @@ export interface BrandImageDTO {
 export interface BrandDTO {
   id: string;
   name: string;
+  handle: string;
   products?: ProductDTO[];
   images?: BrandImageDTO[];
   is_active: boolean;
@@ -29,12 +30,14 @@ export interface FilterableBrandProps
 
 export interface CreateBrandDTO {
   name: string;
+  handle: string;
   is_active?: boolean;
 }
 
 export interface UpdateBrandDTO {
   id: string;
   name?: string;
+  handle?: string;
   is_active?: boolean;
 }
 

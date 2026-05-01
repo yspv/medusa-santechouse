@@ -1,5 +1,6 @@
 export interface AdminCreateBrand {
   name: string;
+  handle: string;
   is_active?: boolean;
   metadata?: Record<string, unknown>;
 }

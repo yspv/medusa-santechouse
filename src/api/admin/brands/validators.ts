@@ -19,6 +19,7 @@ export const AdminGetBrandParams = createSelectParams();
 export const AdminCreateBrand = z
   .object({
     name: z.string().min(1),
+    handle: z.string().min(1),
     is_active: z.boolean().optional(),
     metadata: z.record(z.unknown()).nullish(),
   })
@@ -28,6 +29,7 @@ export type AdminCreateBrand = z.infer<typeof AdminCreateBrand>;
 export const AdminUpdateBrand = z
   .object({
     name: z.string().min(1).optional(),
+    handle: z.string().min(1).optional(),
     is_active: z.boolean().optional(),
     metadata: z.record(z.unknown()).nullish(),
   })
