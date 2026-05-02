@@ -18,7 +18,14 @@ export const useBrandTableColumns = () => {
     () => [
       brandColumnHelper.accessor("name", {
         header: () => <NameHeader />,
-        cell: ({ row }) => <NameCell name={row.original.name} />,
+        cell: ({ row }) => {
+          const images = (row.original.images ?? []) as Array<{
+            type: string;
+            url: string;
+          }>;
+          const thumbnail = images.find((img) => img.type === "thumbnail")?.url;
+          return <NameCell name={row.original.name} thumbnail={thumbnail} />;
+        },
       }),
       brandColumnHelper.accessor("is_active", {
         header: () => <StatusHeader />,

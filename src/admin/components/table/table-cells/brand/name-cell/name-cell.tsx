@@ -1,13 +1,18 @@
 import { useTranslation } from "react-i18next";
+import { Thumbnail } from "../../../../common/thumbnail";
 
 type NameCellProps = {
   name: string;
+  thumbnail?: string | null;
 };
 
-export const NameCell = ({ name }: NameCellProps) => {
+export const NameCell = ({ name, thumbnail }: NameCellProps) => {
   return (
-    <div className="flex w-full h-full items-center overflow-hidden">
-      <span className="truncate">{name}</span>
+    <div className="flex w-full h-full max-w-[250px] items-center gap-x-3 overflow-hidden">
+      <div className="w-fit flex-shrink-0">
+        <Thumbnail src={thumbnail} />
+      </div>
+      <span title={name} className="truncate">{name}</span>
     </div>
   );
 };
