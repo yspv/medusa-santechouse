@@ -33,6 +33,11 @@ export const BrandListTable = () => {
       rowHref={(row) => row.id}
       pageSize={PAGE_SIZE}
       rowCount={count}
+      layout="fill"
+      action={{
+        label: t("actions.create"),
+        to: "create",
+      }}
       enableSearch
     />
   );
