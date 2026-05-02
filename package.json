@@ -24,12 +24,12 @@
   },
   "dependencies": {
     "@agilo/medusa-analytics-plugin": "^1.4.0",
-    "@medusajs/admin-sdk": "2.13.3",
-    "@medusajs/cache-redis": "^2.13.3",
-    "@medusajs/cli": "2.13.3",
-    "@medusajs/framework": "2.13.3",
-    "@medusajs/index": "^2.13.3",
-    "@medusajs/medusa": "2.13.3",
+    "@medusajs/admin-sdk": "2.14.2",
+    "@medusajs/cache-redis": "^2.14.2",
+    "@medusajs/cli": "2.14.2",
+    "@medusajs/framework": "2.14.2",
+    "@medusajs/index": "^2.14.2",
+    "@medusajs/medusa": "2.14.2",
     "@opentelemetry/api": "^1.9.0",
     "@opentelemetry/core": "1.x",
     "@opentelemetry/exporter-trace-otlp-grpc": "^0.208.0",
@@ -44,7 +44,7 @@
     "slugify": "^1.6.6"
   },
   "devDependencies": {
-    "@medusajs/test-utils": "2.13.3",
+    "@medusajs/test-utils": "2.14.2",
     "@swc/core": "1.5.7",
     "@swc/jest": "^0.2.36",
     "@types/bcrypt": "^6.0.0",
