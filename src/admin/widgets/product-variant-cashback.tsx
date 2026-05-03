@@ -1,7 +1,9 @@
 import { defineWidgetConfig } from "@medusajs/admin-sdk";
-import { Container, Heading, StatusBadge } from "@medusajs/ui";
+import { Button, Container, Heading, StatusBadge, toast } from "@medusajs/ui";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { useProductVariant } from "../hooks/api";
+import { useCreateCashback } from "../hooks/api/cashback";
 import {
   DetailWidgetProps,
   AdminProductVariant,
@@ -20,11 +22,21 @@ const ProductVariantCashbackWidget = (
 ) => {
   const { data } = props;
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
   const { variant, isLoading } = useProductVariant(data.product_id!, data.id, {
     fields: "+cashback.*,+cashback.amounts.*",
   });
   const cashback = (variant as AdminProductVariantCashback)?.cashback;
   const hasAmounts = !!cashback?.amounts?.length;
+
+  const { mutate: createCashback, isPending } = useCreateCashback({
+    onSuccess: (res) => {
+      navigate(`/cashbacks/${res.cashback.id}/amounts`);
+    },
+    onError: (err) => {
+      toast.error(err.message);
+    },
+  });
 
   const getLocalePrice = (amount: number, currency: string) => {
     const formatter = Intl.NumberFormat(i18n.language, {
@@ -47,19 +59,32 @@ const ProductVariantCashbackWidget = (
               </StatusBadge>
             </div>
           )}
-          <ActionMenu
-            groups={[
-              {
-                actions: [
-                  {
-                    label: t("actions.edit"),
-                    icon: <PencilSquare />,
-                    to: "edit",
-                  },
-                ],
-              },
-            ]}
-          />
+          {!cashback ? (
+            <Button
+              size="small"
+              variant="secondary"
+              isLoading={isPending}
+              onClick={() =>
+                createCashback({ variant_id: data.id, amounts: [] })
+              }
+            >
+              {t("actions.create")}
+            </Button>
+          ) : (
+            <ActionMenu
+              groups={[
+                {
+                  actions: [
+                    {
+                      label: t("actions.edit"),
+                      icon: <PencilSquare />,
+                      to: `/cashbacks/${cashback.id}/amounts`,
+                    },
+                  ],
+                },
+              ]}
+            />
+          )}
         </div>
       </div>
       {!hasAmounts && <NoRecords className="h-60" />}
