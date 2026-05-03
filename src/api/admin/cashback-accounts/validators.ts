@@ -26,12 +26,12 @@ export const AdminCreateCashbackAccount = z.object({
   customer_id: z.string(),
   currency_code: z.string(),
   is_active: z.boolean().optional(),
-  metadata: z.record(z.unknown()).nullish(),
+  metadata: z.record(z.string(), z.unknown()).nullish(),
 });
 
 export const AdminUpdateCashbackAccount = z.object({
   is_active: z.boolean().optional(),
-  metadata: z.record(z.unknown()).nullish(),
+  metadata: z.record(z.string(), z.unknown()).nullish(),
 });
 
 export const AdminAdjustmentCashbackAccountBalance = z.object({

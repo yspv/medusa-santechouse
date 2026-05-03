@@ -14,11 +14,11 @@ export const AdminCashbacksParams = createFindParams({ offset: 0, limit: 50 });
 export const AdminCreateCashback = z.object({
   variant_id: z.string(),
   amounts: z.array(AdminCreateCashbackAmount),
-  metadata: z.record(z.unknown()).nullish(),
+  metadata: z.record(z.string(), z.unknown()).nullish(),
   is_active: z.boolean().optional(),
 });
 
 export const AdminUpdateCashback = z.object({
   is_active: z.boolean().optional(),
-  metadata: z.record(z.undefined()).nullish(),
+  metadata: z.record(z.string(), z.undefined()).nullish(),
 });

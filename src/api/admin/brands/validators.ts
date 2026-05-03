@@ -22,7 +22,7 @@ export const AdminCreateBrand = z
     name: z.string().min(1),
     handle: z.string().min(1),
     is_active: z.boolean().optional(),
-    metadata: z.record(z.unknown()).nullish(),
+    metadata: z.record(z.string(), z.unknown()).nullish(),
   })
   .strict();
 export type AdminCreateBrand = z.infer<typeof AdminCreateBrand>;
@@ -32,7 +32,7 @@ export const AdminUpdateBrand = z
     name: z.string().min(1).optional(),
     handle: z.string().min(1).optional(),
     is_active: z.boolean().optional(),
-    metadata: z.record(z.unknown()).nullish(),
+    metadata: z.record(z.string(), z.unknown()).nullish(),
   })
   .strict();
 

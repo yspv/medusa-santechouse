@@ -14,13 +14,13 @@ export const AdminCashbackAmountsParams = createFindParams({
 export const AdminCreateCashbackAmount = z.object({
   currency_code: z.string(),
   amount: z.number().positive(),
-  metadata: z.record(z.unknown()).nullish(),
+  metadata: z.record(z.string(), z.unknown()).nullish(),
 });
 
 export const AdminUpdateCashbackAmount = z.object({
   currency_code: z.string().optional(),
   amount: z.number().positive().optional(),
-  metadata: z.record(z.unknown()).nullish(),
+  metadata: z.record(z.string(), z.unknown()).nullish(),
 });
 
 export const AdminBatchupdateCashbackAmount = AdminUpdateCashbackAmount.extend({
