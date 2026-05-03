@@ -52,15 +52,13 @@ const prepareUpsertPriceSets = (data: {
   const priceSetMap = createPriceSetMap(priceSets);
   return priceSetMap.reduce<UpsertPriceSetDTO[]>((acc, [id, prices]) => {
     const source = prices[conversion.from];
-    if (!source?.amount) return acc;
-    if (prices[conversion.to]) {
-      prices[conversion.to].amount = source.amount * conversion.rate;
-    } else {
-      prices[conversion.to] = {
-        currency_code: conversion.to,
-        amount: source.amount * conversion.rate,
-      } as Price;
-    }
+    if (source?.amount == null) return acc;
+    const convertedAmount = Math.round(source.amount * conversion.rate);
+    prices[conversion.to] = {
+      ...(prices[conversion.to] ?? {}),
+      currency_code: conversion.to,
+      amount: convertedAmount,
+    } as Price;
     acc.push({ id, prices: Object.values(prices) });
     return acc;
   }, []);

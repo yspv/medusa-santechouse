@@ -13,6 +13,6 @@ export const createPriceConversionStep = createStep(
   async (id, { container }) => {
     if (!id) return;
     const service = container.resolve(PRICE_CONVERSION_MODULE);
-    service.deletePriceConversions(id);
+    await service.deletePriceConversions(id);
   },
 );
